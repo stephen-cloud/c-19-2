@@ -210,7 +210,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../releasenotes/" class="md-tabs__link">
+        <a href="../thanks/" class="md-tabs__link">
           Fine print
         </a>
       
@@ -583,8 +583,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../awesome-table/" title="Integrate Amplify" class="md-nav__link">
-      Integrate Amplify
+    <a href="../awesome-table/" title="Material Table" class="md-nav__link">
+      Material Table
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../table-polish/" title="Polish" class="md-nav__link">
+      Polish
     </a>
   </li>
 
@@ -618,6 +630,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../thanks/" title="Acknowledgements" class="md-nav__link">
+      Acknowledgements
+    </a>
+  </li>
+
         
           
           
@@ -738,9 +762,8 @@
                 
                   <h1>Connect to the back-end</h1>
                 
-                <div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>Where should we put this? What are the responses?</p>
+                <div class="admonition todo">
+<p class="admonition-title">Where should we put this? What are the responses?</p>
 </div>
 <div class="codehilite"><pre><span></span><code>amplify update api
 amplify push
@@ -770,9 +793,8 @@ amplify push
 <p>Let Amplify maintain this file just like it says.</p>
 <h2 id="initialize-amplify">Initialize Amplify<a class="headerlink" href="#initialize-amplify" title="Permanent link">&para;</a></h2>
 <p>We need to import and initialize Amplify with the configuration in <code>awsmobile</code>. We only need to do it once, so let's put it in <code>index.tsx</code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This goes in <code>index.tsx</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">This goes in <code>index.tsx</code>.</p>
 </div>
 <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">Amplify</span> <span class="nx">from</span> <span class="s1">&#39;@aws-amplify/core&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="nx">amplify_configuration</span> <span class="nx">from</span> <span class="s1">&#39;./aws-exports&#39;</span><span class="p">;</span>
@@ -783,9 +805,8 @@ amplify push
 
 <h2 id="use-the-datastore-api-in-vehiclestsx">Use the DataStore API in <code>Vehicles.tsx</code><a class="headerlink" href="#use-the-datastore-api-in-vehiclestsx" title="Permanent link">&para;</a></h2>
 <p>The <code>DataStore</code> API is an alternative to using the raw GraphQL API, which can get a bit fiddly to get right at first.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This goes in <code>Vehicles.tsx</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">This goes in <code>Vehicles.tsx</code>.</p>
 </div>
 <h2 id="using-datastore">Using <code>DataStore</code><a class="headerlink" href="#using-datastore" title="Permanent link">&para;</a></h2>
 <p>Import it.</p>
@@ -794,17 +815,17 @@ amplify push
 
 
 <p><code>DataStore</code> functions return <code>Promise</code>s. So we have to handle that in <code>addVehicle()</code> where we save a vehicle, now using <code>DataStore.save()</code>.</p>
-<div class="codehilite"><pre><span></span><code>    <span class="kd">function</span> <span class="nx">addVehicle() {</span>
-        <span class="kr">const</span> <span class="nx">make</span> <span class="o">=</span> <span class="nx">uuid</span><span class="p">();</span>
-        <span class="kr">const</span> <span class="nx">model</span> <span class="o">=</span> <span class="nx">uuid</span><span class="p">();</span>
-        <span class="kr">const</span> <span class="nx">mileage</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="kr">const</span> <span class="nx">vehicle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vehicle</span><span class="p">({</span> <span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">mileage</span> <span class="p">});</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="nx">addVehicle() {</span>
+    <span class="kr">const</span> <span class="nx">make</span> <span class="o">=</span> <span class="nx">uuid</span><span class="p">();</span>
+    <span class="kr">const</span> <span class="nx">model</span> <span class="o">=</span> <span class="nx">uuid</span><span class="p">();</span>
+    <span class="kr">const</span> <span class="nx">mileage</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="kr">const</span> <span class="nx">vehicle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vehicle</span><span class="p">({</span> <span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">mileage</span> <span class="p">});</span>
 
-        <span class="nx">DataStore</span>
-            <span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">vehicle</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
-            <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="nx">DataStore</span>
+        <span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">vehicle</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">)</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div>
 
 
@@ -814,12 +835,12 @@ amplify push
 <p>The default query is all objects. We can supply predicates and pagination details in the query. We'll get to that when we use <a href="https://material-table.com/#/">https://material-table.com/#/</a>, which lazy loads as it paginates.</p>
 </div>
 <p>We use the <code>setVehicles(...)</code> React hook as before. But this time with the results of the DataStore query. Here's that function.</p>
-<div class="codehilite"><pre><span></span><code>    <span class="kd">function</span> <span class="nx">fetchAll() {</span>
-        <span class="nx">DataStore</span>
-            <span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">Vehicle</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">setVehicles</span><span class="p">)</span>
-            <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
-    <span class="p">};</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="nx">fetchAll() {</span>
+    <span class="nx">DataStore</span>
+        <span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">Vehicle</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">setVehicles</span><span class="p">)</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+<span class="p">};</span>
 </code></pre></div>
 
 
@@ -844,21 +865,21 @@ amplify push
 </code></pre></div>
 
 
-<div class="codehilite"><pre><span></span><code>    <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">fetchAll</span><span class="p">();</span>
+
+    <span class="kd">function</span> <span class="nx">subscriber</span><span class="p">(</span><span class="nx">subscriptionMessage</span>: <span class="kt">SubscriptionMessage</span><span class="o">&lt;</span><span class="nx">Vehicle</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;subscriptionMessage&#39;</span><span class="p">,</span> <span class="nx">subscriptionMessage</span><span class="p">);</span>
+
         <span class="nx">fetchAll</span><span class="p">();</span>
+    <span class="p">}</span>
 
-        <span class="kd">function</span> <span class="nx">subscriber</span><span class="p">(</span><span class="nx">subscriptionMessage</span>: <span class="kt">SubscriptionMessage</span><span class="o">&lt;</span><span class="nx">Vehicle</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;subscriptionMessage&#39;</span><span class="p">,</span> <span class="nx">subscriptionMessage</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">DataStore</span>
+        <span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">Vehicle</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">subscriber</span><span class="p">);</span>
 
-            <span class="nx">fetchAll</span><span class="p">();</span>
-        <span class="p">}</span>
-
-        <span class="kr">const</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">DataStore</span>
-            <span class="p">.</span><span class="nx">observe</span><span class="p">(</span><span class="nx">Vehicle</span><span class="p">)</span>
-            <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">subscriber</span><span class="p">);</span>
-
-        <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">();</span> <span class="p">};</span>
-    <span class="p">},</span> <span class="p">[]);</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="nx">subscription</span><span class="p">.</span><span class="nx">unsubscribe</span><span class="p">();</span> <span class="p">};</span>
+<span class="p">},</span> <span class="p">[]);</span>
 </code></pre></div>
 
 
@@ -897,7 +918,7 @@ amplify push
 </div>
 <p>Let's try it anyway. (<code>yarn start</code> as usual.)</p>
 <h2 id="now-for-the-astonishing-bit">Now for the astonishing bit<a class="headerlink" href="#now-for-the-astonishing-bit" title="Permanent link">&para;</a></h2>
-<p>Open up another browser <a href="http://localhost:3000">http://localhost:3000</a> and watch what happens when you dd a vehicle.</p>
+<p>Open up another browser <a href="http://localhost:3000">http://localhost:3000</a> and watch what happens when you add a vehicle.</p>
 <p>You just wrote Google docs for cars. </p>
 <h2 id="the-upshot">The upshot<a class="headerlink" href="#the-upshot" title="Permanent link">&para;</a></h2>
 <p>We configured Amplify. We created an Amplify DataSource observer and subscribed to events from it. We learned just a little about <code>useEffect()</code> and glued that all together. We were a bit astonished at what that allowed us to do if we're being honest.</p>
@@ -1056,13 +1077,13 @@ amplify push
           </a>
         
         
-          <a href="../awesome-table/" title="Integrate Amplify" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../awesome-table/" title="Material Table" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Integrate Amplify
+                Material Table
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

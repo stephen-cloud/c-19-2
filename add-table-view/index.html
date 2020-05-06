@@ -210,7 +210,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../releasenotes/" class="md-tabs__link">
+        <a href="../thanks/" class="md-tabs__link">
           Fine print
         </a>
       
@@ -561,8 +561,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../awesome-table/" title="Integrate Amplify" class="md-nav__link">
-      Integrate Amplify
+    <a href="../awesome-table/" title="Material Table" class="md-nav__link">
+      Material Table
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../table-polish/" title="Polish" class="md-nav__link">
+      Polish
     </a>
   </li>
 
@@ -596,6 +608,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../thanks/" title="Acknowledgements" class="md-nav__link">
+      Acknowledgements
+    </a>
+  </li>
+
         
           
           
@@ -731,8 +755,8 @@
 
 <p>Let's unpack that.</p>
 <p>We need <code>&lt;&gt;</code> ... <code>&lt;/&gt;</code> around all the elements because as there can only be one top-level element. We have two: The <code>&lt;Button&gt;</code> and the <code>&lt;Table&gt;</code>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p>The table definition is the analog of basic HTML tables with a head and a body. </p>
 </div>
 <p>The <code>{</code> ... <code>}</code> inside the <code>&lt;TableBody&gt;</code> lets us run display logic, in this case loop over the vehicles and generate table rows. There must be only one statement inside <code>{</code> ... <code>}</code> and that code must return React elements.</p>
@@ -777,23 +801,23 @@
 <p>See <a href="https://material-ui.com/customization/breakpoints/">https://material-ui.com/customization/breakpoints/</a> for the details.</p>
 </div>
 <p>So with all that, now</p>
-<div class="codehilite"><pre><span></span><code>            <span class="o">&lt;</span><span class="nx">Grid</span> <span class="nx">container</span> <span class="nx">spacing</span><span class="o">=</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="nx">Grid</span> <span class="nx">item</span> <span class="nx">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">12</span><span class="p">}</span> <span class="nx">sm</span><span class="o">=</span><span class="p">{</span><span class="mi">3</span><span class="p">}</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onClick</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Add</span> <span class="nx">vehicle</span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
-                <span class="o">&lt;</span><span class="err">/Grid&gt;</span>
-                <span class="o">&lt;</span><span class="nx">Grid</span> <span class="nx">item</span> <span class="nx">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">12</span><span class="p">}</span> <span class="nx">sm</span><span class="o">=</span><span class="p">{</span><span class="mi">9</span><span class="p">}</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">Table</span><span class="o">&gt;</span>
-                        <span class="p">...</span>
-                    <span class="o">&lt;</span><span class="err">/Table&gt;</span>
-                <span class="o">&lt;</span><span class="err">/Grid&gt;</span>
-            <span class="o">&lt;</span><span class="err">/Grid&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nx">Grid</span> <span class="nx">container</span> <span class="nx">spacing</span><span class="o">=</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Grid</span> <span class="nx">item</span> <span class="nx">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">12</span><span class="p">}</span> <span class="nx">sm</span><span class="o">=</span><span class="p">{</span><span class="mi">3</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onClick</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Add</span> <span class="nx">vehicle</span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+    <span class="o">&lt;</span><span class="err">/Grid&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Grid</span> <span class="nx">item</span> <span class="nx">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">12</span><span class="p">}</span> <span class="nx">sm</span><span class="o">=</span><span class="p">{</span><span class="mi">9</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Table</span><span class="o">&gt;</span>
+            <span class="p">...</span>
+        <span class="o">&lt;</span><span class="err">/Table&gt;</span>
+    <span class="o">&lt;</span><span class="err">/Grid&gt;</span>
+<span class="o">&lt;</span><span class="err">/Grid&gt;</span>
 </code></pre></div>
 
 
 <p>will layout both the button and the table full width if the screen size is less than 600px. and side-by-side if the size if 600px or above.</p>
 <p>Try waggling the bottom-right corner of the browser around to see the button and table move relative to each other. This is responsive design at work with defined columns.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p><code>&lt;Grid container spacing={??}&gt;</code> adds spacing between cells of the grid: It does not affect margins of the grid container itself. You can try different values for the padding and see this work.</p>
 </div>
 <h2 id="the-upshot">The upshot<a class="headerlink" href="#the-upshot" title="Permanent link">&para;</a></h2>

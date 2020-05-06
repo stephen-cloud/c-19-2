@@ -210,7 +210,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../releasenotes/" class="md-tabs__link">
+        <a href="../thanks/" class="md-tabs__link">
           Fine print
         </a>
       
@@ -512,8 +512,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../awesome-table/" title="Integrate Amplify" class="md-nav__link">
-      Integrate Amplify
+    <a href="../awesome-table/" title="Material Table" class="md-nav__link">
+      Material Table
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../table-polish/" title="Polish" class="md-nav__link">
+      Polish
     </a>
   </li>
 
@@ -547,6 +559,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../thanks/" title="Acknowledgements" class="md-nav__link">
+      Acknowledgements
+    </a>
+  </li>
+
         
           
           
@@ -612,9 +636,8 @@
 <h2 id="a-little-layout">A little layout<a class="headerlink" href="#a-little-layout" title="Permanent link">&para;</a></h2>
 <p>Lets solve the ugly indentation of the "Vehicles" header. Actually, let's solve the problem for all pages at the same time. This is easy: Just add a simple style to <code>App.tsx</code>. </p>
 <p>Define a style before the function definition like this.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This goes in <code>App.tsx</code>.</p>
+<div class="admonition into">
+<p class="admonition-title">This goes in <code>App.tsx</code>.</p>
 </div>
 <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">makeStyles</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@material-ui/core&#39;</span><span class="p">;</span>
 
@@ -692,8 +715,7 @@
 <p>A bit of a mouthful, but it's going to be jolly useful. Specifically, we're going to use the <code>Vehicle</code> class intact.</p>
 <h2 id="now-add-some-state-for-the-list-of-vehicles">Now add some state for the list of vehicles<a class="headerlink" href="#now-add-some-state-for-the-list-of-vehicles" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>All this goes in <code>Vehicles.tsx</code></p>
+<p class="admonition-title">All this goes in <code>Vehicles.tsx</code>.</p>
 </div>
 <p>Import the new <code>Vehicle</code> class</p>
 <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Vehicle</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./models&#39;</span><span class="p">;</span>
@@ -749,12 +771,12 @@
 </code></pre></div>
 
 
-<div class="codehilite"><pre><span></span><code>    <span class="k">return</span> <span class="p">(</span>
-        <span class="o">&lt;&gt;</span>
-            <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onClick</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Add</span> <span class="nx">vehicle</span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
-            <span class="o">&lt;</span><span class="nx">Typography</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">vehicles</span><span class="p">)}</span><span class="o">&lt;</span><span class="err">/Typography&gt;</span>
-        <span class="o">&lt;</span><span class="err">/&gt;</span>
-    <span class="p">);</span>
+<div class="codehilite"><pre><span></span><code>  <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onClick</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Add</span> <span class="nx">vehicle</span><span class="o">&lt;</span><span class="err">/Button&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Typography</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">vehicles</span><span class="p">)}</span><span class="o">&lt;</span><span class="err">/Typography&gt;</span>
+      <span class="o">&lt;</span><span class="err">/&gt;</span>
+  <span class="p">);</span>
 </code></pre></div>
 
 
