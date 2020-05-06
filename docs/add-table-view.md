@@ -40,7 +40,7 @@ Let's unpack that.
 
 We need `<>` ... `</>` around all the elements because as there can only be one top-level element. We have two: The `<Button>` and the `<Table>`.
 
-!!! note
+!!! hint
     The table definition is the analog of basic HTML tables with a head and a body. 
 
 The `{` ... `}` inside the `<TableBody>` lets us run display logic, in this case loop over the vehicles and generate table rows. There must be only one statement inside `{` ... `}` and that code must return React elements.
@@ -98,23 +98,23 @@ We can specify _breakpoint values_ for items (any number of `xs`, `sm`, `md`, `l
 So with all that, now
 
 ```typescript
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={3}>
-                    <Button onClick={onClick}>Add vehicle</Button>
-                </Grid>
-                <Grid item xs={12} sm={9}>
-                    <Table>
-                        ...
-                    </Table>
-                </Grid>
-            </Grid>
+<Grid container spacing={2}>
+    <Grid item xs={12} sm={3}>
+        <Button onClick={onClick}>Add vehicle</Button>
+    </Grid>
+    <Grid item xs={12} sm={9}>
+        <Table>
+            ...
+        </Table>
+    </Grid>
+</Grid>
 ```
 
 will layout both the button and the table full width if the screen size is less than 600px. and side-by-side if the size if 600px or above.
 
 Try waggling the bottom-right corner of the browser around to see the button and table move relative to each other. This is responsive design at work with defined columns.
 
-!!! note
+!!! hint
     `<Grid container spacing={??}>` adds spacing between cells of the grid: It does not affect margins of the grid container itself. You can try different values for the padding and see this work.
 
 ## The upshot

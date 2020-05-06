@@ -1,4 +1,4 @@
-!!! note
+!!! info
     If you get turned around with the sequence of updates we're going to make with files, or if you'd rather the TL;DR, click "The upshot" on the right to see what's what.
 
 Well, first we need to be able to get to pages for all the things you'll be dealing with in an autobody shop: _vehicles_, _owners_, _services_, _parts_, and _work orders_.
@@ -101,8 +101,7 @@ yarn add react-router-dom @types/react-router-dom
 
 Now wrap the `App` component in a `<BrowserRouter>` ... `</BrowserRouter>`. The easiest place to do this is in `index.tsx`.
 
-!!! note 
-    Make these changes in `index.tsx`
+!!! note "Make these changes in `index.tsx`."
 
 Add the import
 
@@ -130,8 +129,7 @@ ReactDOM.render(
 
 It's actually pretty easy now we have the stub components and the `<BrowserRouter>` wrapper.
 
-!!! note 
-    Make these changes in `App.tsx`
+!!! info "Make these changes in `App.tsx`."
 
 Add `<Link>`s and URL paths to the `<Button>`s in the `<AppBar>`.
 

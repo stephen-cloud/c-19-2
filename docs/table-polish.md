@@ -1,7 +1,58 @@
+Material Table takes options. Lots of options. Let's use a couple of quick ones here.
+
+Remove the total number of rows for the display in pagination.
+
+```typescript
+const localization = {
+    pagination: {
+        labelDisplayedRows: '{from}-{to}'
+    }
+}
+```
+
+Remove the title and change the way we display pages.
+
+```typescript
+const options: Options = {
+    showTitle: false,
+    showFirstLastPageButtons: false,
+    paginationType: "stepped",
+}
+```
+
+So now our Material Table declaration looks like
+
+```typescript
+<MaterialTable
+    tableRef={tableRef}
+    data={data}
+    columns={columns}
+    editable={editable}
+    localization={localization}
+    options={options}
+/>
+```
+
+!!! todo
+    More polish needed here
+
+    - Fix screen flash
+
+    - Update total number of rows
+
+## The upshot
+
+We integrated Amplify DataStore and Material Table. I think it was well worth it. It would have taken ages to do this from scratch.
+
+There are some wrinkles, but not enough we can't press on.
+
+Our final `Vehicles.tsx` is this
+
+```typescript
 import React, { useEffect, createRef } from 'react';
 import { Grid } from '@material-ui/core';
 import { Vehicle } from './models';
-import { DataStore, SubscriptionMessage, ModelPredicate } from '@aws-amplify/datastore';
+import { DataStore, SubscriptionMessage } from '@aws-amplify/datastore';
 import MaterialTable, { Column, Query, QueryResult, MaterialTableProps, Options } from 'material-table'
 
 const columns: Column<Vehicle>[] = [
@@ -53,15 +104,13 @@ function Vehicles() {
                 limit: query.pageSize
             };
 
-            function searchCriteria(predicate: ModelPredicate<Vehicle>): ModelPredicate<Vehicle> {
-                return predicate.or(or =>
-                    or.make("contains", query.search)
-                        .model("contains", query.search)
-                        .mileage("ge", parseInt(query.search, 10)));
-            }
-
             DataStore
-                .query(Vehicle, searchCriteria, thisPage)
+                .query(Vehicle,
+                    criteria => criteria.or(orTerms => orTerms
+                        .make("contains", query.search)
+                        .model("contains", query.search)
+                        .mileage("ge", parseInt(query.search))),
+                    thisPage)
                 .then(vehicles => {
                     resolve({
                         data: rowMapper(vehicles),
@@ -164,3 +213,6 @@ function Vehicles() {
 }
 
 export default Vehicles;
+```
+
+![Table after polish](./assets/screenshots/table-after-polish.png)

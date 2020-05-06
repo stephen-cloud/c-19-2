@@ -1,6 +1,5 @@
-!!! error
-    Where should we put this? What are the responses?
-
+!!! todo "Where should we put this? What are the responses?"
+    
 ```shell
 amplify update api
 amplify push
@@ -33,9 +32,8 @@ Let Amplify maintain this file just like it says.
 
 We need to import and initialize Amplify with the configuration in `awsmobile`. We only need to do it once, so let's put it in `index.tsx`.
 
-!!! note
-    This goes in `index.tsx`.
-
+!!! info "This goes in `index.tsx`."
+   
 ```typescript
 import Amplify from '@aws-amplify/core';
 import amplify_configuration from './aws-exports';
@@ -47,8 +45,7 @@ Amplify.configure(amplify_configuration);
 
 The `DataStore` API is an alternative to using the raw GraphQL API, which can get a bit fiddly to get right at first.
 
-!!! note
-    This goes in `Vehicles.tsx`.
+!!! info "This goes in `Vehicles.tsx`."
 
 ## Using `DataStore`
 
@@ -61,17 +58,17 @@ import { DataStore } from '@aws-amplify/datastore';
 `DataStore` functions return `Promise`s. So we have to handle that in `addVehicle()` where we save a vehicle, now using `DataStore.save()`.
 
 ```typescript
-    function addVehicle() {
-        const make = uuid();
-        const model = uuid();
-        const mileage = Math.floor(Math.random() * 100000) + 1
-        const vehicle = new Vehicle({ make, model, mileage });
+function addVehicle() {
+    const make = uuid();
+    const model = uuid();
+    const mileage = Math.floor(Math.random() * 100000) + 1
+    const vehicle = new Vehicle({ make, model, mileage });
 
-        DataStore
-            .save(vehicle)
-            .then(console.log)
-            .catch(console.error);
-    }
+    DataStore
+        .save(vehicle)
+        .then(console.log)
+        .catch(console.error);
+}
 ```
 
 That's also true for `DataStore.query()`, the way we're going to fetch data now.
@@ -82,12 +79,12 @@ That's also true for `DataStore.query()`, the way we're going to fetch data now.
 We use the `setVehicles(...)` React hook as before. But this time with the results of the DataStore query. Here's that function.
 
 ```typescript
-    function fetchAll() {
-        DataStore
-            .query(Vehicle)
-            .then(setVehicles)
-            .catch(console.error);
-    };
+function fetchAll() {
+    DataStore
+        .query(Vehicle)
+        .then(setVehicles)
+        .catch(console.error);
+};
 ```
 
 ## Handle subscription events
@@ -118,21 +115,21 @@ import React, { useEffect } from 'react';
 ```
 
 ```typescript
-    useEffect(() => {
+useEffect(() => {
+    fetchAll();
+
+    function subscriber(subscriptionMessage: SubscriptionMessage<Vehicle>) {
+        console.log('subscriptionMessage', subscriptionMessage);
+
         fetchAll();
+    }
 
-        function subscriber(subscriptionMessage: SubscriptionMessage<Vehicle>) {
-            console.log('subscriptionMessage', subscriptionMessage);
-    
-            fetchAll();
-        }
-    
-        const subscription = DataStore
-            .observe(Vehicle)
-            .subscribe(subscriber);
+    const subscription = DataStore
+        .observe(Vehicle)
+        .subscribe(subscriber);
 
-        return () => { subscription.unsubscribe(); };
-    }, []);
+    return () => { subscription.unsubscribe(); };
+}, []);
 ```
 
 Now whenever AppSync sends us an update we read the data from DynamoDB and display it.
@@ -155,7 +152,7 @@ Let's try it anyway. (`yarn start` as usual.)
 
 ## Now for the astonishing bit
 
-Open up another browser <http://localhost:3000> and watch what happens when you dd a vehicle.
+Open up another browser <http://localhost:3000> and watch what happens when you add a vehicle.
 
 You just wrote Google docs for cars. 
 

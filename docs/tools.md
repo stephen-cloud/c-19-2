@@ -1,8 +1,3 @@
-!!! note
-    The code and docs are in GitHUb <https://github.com/stephen-cloud/c-19-autobody>.
-
-    This document is <https://stephen-cloud.github.io/c-19-autobody/>.
-
 To get going with this tutorial, you'll need some tools. Please follow the links for instructions. Then come back here where we'll kick the tires to see whether the setup worked.
 
 ## Install
@@ -16,7 +11,6 @@ To get going with this tutorial, you'll need some tools. Please follow the links
 | TypeScript | Yes, all the docs assume TypeScript | <https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html#installing-typescript> |
 | AWS CLI | Optional, but super useful | <https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html> |
 | GitHub account | Optional | <https://github.com> |
-
 
 ## Did the installations work?
 
@@ -84,6 +78,6 @@ You should see
 
 ... TBD
 
-!!! Todo
+!!! todo
     Links to fixing installation failures.
  

@@ -61,7 +61,9 @@ nav:
         - Add a table: add-table-view.md
         - Connect to the back-end: connecttobackend.md
     - 4. Make the table great:
-        - Integrate Amplify: awesome-table.md 
+        - Material Table: awesome-table.md 
+        - Polish: table-polish.md
     - Fine print: 
+        - Acknowledgements: thanks.md
         - Release notes: releasenotes.md
         - License: license.md

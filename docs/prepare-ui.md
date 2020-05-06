@@ -6,8 +6,7 @@ Lets solve the ugly indentation of the "Vehicles" header. Actually, let's solve 
 
 Define a style before the function definition like this.
 
-!!! note
-    This goes in `App.tsx`.
+!!! into "This goes in `App.tsx`."
 
 ```typescript
 import { makeStyles } from '@material-ui/core';
@@ -93,8 +92,7 @@ A bit of a mouthful, but it's going to be jolly useful. Specifically, we're goin
 
 ## Now add some state for the list of vehicles
 
-!!! note
-    All this goes in `Vehicles.tsx`
+!!! note "All this goes in `Vehicles.tsx`."
 
 Import the new `Vehicle` class
 
@@ -159,12 +157,12 @@ import { Typography, Button } from '@material-ui/core';
 ```
 
 ```typescript
-    return (
-        <>
-            <Button onClick={onClick}>Add vehicle</Button>
-            <Typography>{JSON.stringify(vehicles)}</Typography>
-        </>
-    );
+  return (
+      <>
+          <Button onClick={onClick}>Add vehicle</Button>
+          <Typography>{JSON.stringify(vehicles)}</Typography>
+      </>
+  );
 ```
 
 Try it out. Nice. Now there's a button "ADD VEHICLE" and some JSON for all the vehicles we're adding.
