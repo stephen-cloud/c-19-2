@@ -1,13 +1,5 @@
 We're going to add code to one of the pages—vehicles—to add a vehicle and list them out. We just generate random values for fields for now. And it won't be hooked up to the back end. But this will let us see how to update state and display the complete list. 
 
-## First add Amplify dependencies
-
-```
-yarn add aws-amplify @aws-amplify/ui-react
-```
-
-We're not going to use these right off the bat, but let's do it while we're thinking of it.
-
 ## A little layout
 
 Lets solve the ugly indentation of the "Vehicles" header. Actually, let's solve the problem for all pages at the same time. This is easy: Just add a simple style to `App.tsx`. 
@@ -28,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 ```
 
-Remember the `theme` argument lets us use spacing from the theme itself. We could use hard-coded pixel sizes, but we'd have to update all those manually every time the theme changes. That would be not only annoying, but in addition your pull request would be rejected and no one on your team will want to go to lunch with you today.
+The `theme` argument lets us use spacing from the theme itself. We could use hard-coded pixel sizes, but we'd have to update all those manually every time the theme changes. That would be not only annoying, but in addition your pull request would be rejected and no one on your team will want to go to lunch with you today.
 
-`makeStyles()` returns a function. We get the classNames from the result of calling this function. And we use it referencing the class name.
+`makeStyles()` returns a function. We get the classNames from the result of calling this function. And we use it referencing the class name. Look at the `<div>` around the `<Switch>`.
 
 ```typescript
 function App() {
@@ -61,7 +53,43 @@ function App() {
 }
 ```
 
-It's looking quite a bit better.
+It's looking quite a bit better. We have every right to be chuffed.
+
+## Generate GraphQL models
+
+We defined a model for a vehicle in the previous chapter.
+
+```
+type Vehicle @model {
+  id: ID!
+  make: String!
+  model: String!
+  mileage: Int
+}
+```
+
+Now generate TypeScript type definitions.
+
+```shell
+amplify codegen models
+```
+
+In case you're wondering, this is what's generated.
+
+```typescript
+import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
+
+export declare class Vehicle {
+  readonly id: string;
+  readonly make: string;
+  readonly model: string;
+  readonly mileage?: number;
+  constructor(init: ModelInit<Vehicle>);
+  static copyOf(source: Vehicle, mutator: (draft: MutableModel<Vehicle>) => MutableModel<Vehicle> | void): Vehicle;
+}
+```
+
+A bit of a mouthful, but it's going to be jolly useful. Specifically, we're going to use the `Vehicle` class intact.
 
 ## Now add some state for the list of vehicles
 
@@ -77,7 +105,7 @@ import { Vehicle } from './models';
 We maintain state using React hooks. See <https://reactjs.org/docs/hooks-overview.html>. Hooks are so cool.
 
 ```typescript
-    const [vehicles, setVehicles] = React.useState<Vehicle[]>([])
+const [vehicles, setVehicles] = React.useState<Vehicle[]>([])
 ```
 
 We'll be using random placeholders for fields: UUIDs are just the ticket.
@@ -94,35 +122,32 @@ import { uuid } from 'uuidv4';
 
 # Code to update the list of vehicles
 
-A new function, `addVehicle()` adds a vehicle to the `vehicles` state. This goes
+A new function, `addVehicle()`, adds a vehicle to the `vehicles` state.
 
 ```typescript
-function Vehicles() {
-    const [vehicles, setVehicles] = React.useState<Vehicle[]>([]);
+function addVehicle() {
+    const make = uuid();
+    const model = uuid();
+    const mileage = Math.floor(Math.random() * 100000) + 1 
+    const vehicle = new Vehicle({ make, model, mileage });
 
-    function addVehicle() {
-        const make = uuid();
-        const model = uuid();
-        const mileage = Math.floor(Math.random() * 100000) + 1 
-        const vehicle = new Vehicle({ make, model, mileage });
-
-        setVehicles([...vehicles, vehicle]);
-    }
+    setVehicles([...vehicles, vehicle]);
+}
 ```
 
 !!! note
-    The `Vehicle` class contains metadata that Amplify runtime uses for persistence. This is out-of-bounds for us to update directly. However all persistent classes derived from `schema.graphql`—including our `Vehicle` class—includes a constructor with just our fields except `id`, which is considered part of the metadata.
+    The `Vehicle` class contains metadata that Amplify runtime uses for persistence. This is out-of-bounds for us to update directly. However all persistent classes derived from `schema.graphql`—including our `Vehicle` class—include a constructor with just our fields except `id`, which is considered part of the metadata.
 
 Add a `<Button onClick{...}>` handler. This also needs to be inside the main function.
 
 ```typescript
-    function onClick(event: React.MouseEvent) {
-        console.log('event', event);
+function onClick(event: React.MouseEvent) {
+    console.log('event', event);
 
-        addVehicle();
+    addVehicle();
 
-        event.preventDefault();
-    }
+    event.preventDefault();
+}
 ```
 
 The `event.preventDefault();` is necessary because React decorates native DOM events and we don't want the browser to refresh or reload the window with the underlying event.
@@ -186,3 +211,10 @@ function Vehicles() {
 
 export default Vehicles;
 ```
+
+![Add button and some JSON output](./assets/screenshots/add-vehicle-display-json.png)
+
+!!! note
+    If you have a keen eye, you'll see that the Amplify runtime has already created values for the `id` fields when new did `new Vehicle({ make, model, mileage })`. This also happens to be a UUID. Just not one of the ones we assigned explicitly. 
+    
+    This explanation's a bit confusing. Sorry about that.

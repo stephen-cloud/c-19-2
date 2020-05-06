@@ -259,3 +259,6 @@ export default App;
 ```
 
 As we pointed out above, it's not going to win any design awards. Keep going anyway just in case we fix it.
+
+![C-19 navigation](./assets/screenshots/navigation-home.png)
+

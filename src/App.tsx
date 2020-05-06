@@ -4,8 +4,18 @@ import { Link, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import Vehicles from './Vehicles';
 import Placeholder from './Placeholder';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  content: {
+    // top, right, bottom, left
+    margin: theme.spacing(2, 2, 0, 2)
+  }
+}));
 
 function App() {
+  const classes = useStyles();
+
   return (
     <>
       <AppBar color="inherit" position="static">
@@ -22,7 +32,7 @@ function App() {
         </div>
       </AppBar>
 
-      <div>
+      <div className={classes.content}>
         <main>
           <Switch>
             <Route path="/" component={Home} exact />

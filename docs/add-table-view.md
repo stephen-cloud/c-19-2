@@ -3,7 +3,7 @@ We just got the button hooked up and printed out the state. Clearly JSON is not 
 Luckily it's easy. Import more elements from `@material-ui/core`.
 
 ```typescript
-import { Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 ```
 
 Replace the `return` statement with
@@ -47,7 +47,7 @@ The `{` ... `}` inside the `<TableBody>` lets us run display logic, in this case
 
 Try it. Not bad. But there's more.
 
-## Layout likes to be on a `<Grid>`
+## Layout likes to be on a grid
 
 Responsive UI frameworks are usually based around the idea of layout in twelve columns. React is one of those frameworks.
 
@@ -82,6 +82,8 @@ Add the two items inside the container.
             <Grid item>
                 <Table>
                     ...
+                </Table>
+            </Grid>
 ```
 
 This lays out the button and table items side-by-side. Try resizing the screen. Things move around as the screen size changes.
@@ -116,6 +118,20 @@ Try waggling the bottom-right corner of the browser around to see the button and
     `<Grid container spacing={??}>` adds spacing between cells of the grid: It does not affect margins of the grid container itself. You can try different values for the padding and see this work.
 
 ## The upshot
+
+We built a super simple application that has a UI and a backend.
+
+We see how the application is synchronized across all open browsers.
+
+We're starting to use responsive design.
+
+iPad portrait
+
+![Basic iPad portrait](./assets/screenshots/basic-ipad-portrait.png)
+
+iPad landscape
+
+![Basic iPad landscape](./assets/screenshots/basic-ipad-landscape.png)
 
 We added an array of Vehicles as state, a button to add a new one with some random values for the fields for `make`, `model`, and `mileage`, and a list of them that updates as we add a vehicle.
 
@@ -181,9 +197,34 @@ function Vehicles() {
 }
 
 export default Vehicles;
-
-
-export default Vehicles;
 ```
 
 Now we're going to integrate the UI we just made with the backend database.
+
+### Adding a "delete all" button is easy
+
+Add the button
+
+```typescript
+<Grid item xs={12} sm={3}>
+    <Button onClick={onClick}>Add vehicle</Button>
+    <Button onClick={onDeleteAll}>Delete all</Button>
+</Grid>
+```
+
+And a handler
+
+```
+function onDeleteAll(event: React.MouseEvent) {
+    console.log('event', event);
+
+    DataStore
+        .delete(Vehicle, Predicates.ALL)
+        .then(console.log)
+        .catch(console.error);
+
+    event.preventDefault();
+}
+```
+
+Suddenly, integrating UI and backend looks not as hard as we'd thought.
