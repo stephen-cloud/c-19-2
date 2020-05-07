@@ -21,13 +21,7 @@
 			}
 		}
 	},
-	"auth": {
-		"c1925d4193ab": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	},
+	"auth": {},
 	"hosting": {
 		"S3AndCloudFront": {
 			"service": "S3AndCloudFront",
