@@ -1,7 +1,7 @@
 import React, { useEffect, createRef } from 'react';
 import { Grid } from '@material-ui/core';
 import { Vehicle } from './models';
-import { DataStore, SubscriptionMessage, ModelPredicate } from '@aws-amplify/datastore';
+import { SubscriptionMessage, ModelPredicate } from '@aws-amplify/datastore';
 import MaterialTable, { Column, Query, QueryResult, MaterialTableProps, Options } from 'material-table'
 
 const columns: Column<Vehicle>[] = [
@@ -60,16 +60,16 @@ function Vehicles() {
                         .mileage("ge", parseInt(query.search, 10)));
             }
 
-            DataStore
-                .query(Vehicle, searchCriteria, thisPage)
-                .then(vehicles => {
-                    resolve({
-                        data: rowMapper(vehicles),
-                        page: query.page,
-                        totalCount: 1000000
-                    });
-                })
-                .catch(reject);
+            // DataStore
+            //     .query(Vehicle, searchCriteria, thisPage)
+            //     .then(vehicles => {
+            //         resolve({
+            //             data: rowMapper(vehicles),
+            //             page: query.page,
+            //             totalCount: 1000000
+            //         });
+            //     })
+            //     .catch(reject);
         })
     }
 
@@ -81,51 +81,51 @@ function Vehicles() {
                     model: newData.model,
                     mileage: parseInt(newData.mileage, 10)
                 });
-                DataStore
-                    .save(add)
-                    .then(result => {
-                        clearTimeout(timeout)
+                // DataStore
+                //     .save(add)
+                //     .then(result => {
+                //         clearTimeout(timeout)
 
-                        resolve(result);
-                    })
-                    .catch(reject)
+                //         resolve(result);
+                //     })
+                //     .catch(reject)
             }, 1000);
         })
 
     const onRowDelete = (oldData: any) =>
         new Promise((resolve, reject) => {
             const timeout = setTimeout(() => {
-                DataStore
-                    .delete(Vehicle, oldData.id)
-                    .then(result => {
-                        clearTimeout(timeout)
+                // DataStore
+                //     .delete(Vehicle, oldData.id)
+                //     .then(result => {
+                //         clearTimeout(timeout)
 
-                        resolve(result);
-                    })
-                    .catch(reject)
+                //         resolve(result);
+                //     })
+                //     .catch(reject)
             }, 1000);
         })
 
     const onRowUpdate = (newData: any, oldData: any) =>
         new Promise((resolve, reject) => {
             const timeout = setTimeout(() => {
-                DataStore
-                    .query(Vehicle, oldData.id)
-                    .then(original => {
-                        const updated = Vehicle.copyOf(original, updated => {
-                            updated.make = newData.make
-                            updated.model = newData.model
-                            updated.mileage = parseInt(newData.mileage, 10)
-                        });
+                // DataStore
+                //     .query(Vehicle, oldData.id)
+                //     .then(original => {
+                //         const updated = Vehicle.copyOf(original, updated => {
+                //             updated.make = newData.make
+                //             updated.model = newData.model
+                //             updated.mileage = parseInt(newData.mileage, 10)
+                //         });
 
-                        return DataStore.save(updated);
-                    })
-                    .then(result => {
-                        clearTimeout(timeout)
+                //         return DataStore.save(updated);
+                //     })
+                //     .then(result => {
+                //         clearTimeout(timeout)
 
-                        resolve(result);
-                    })
-                    .catch(reject)
+                //         resolve(result);
+                //     })
+                //     .catch(reject)
             }, 1000);
         })
 
@@ -143,8 +143,14 @@ function Vehicles() {
 
     const options: Options = {
         showTitle: false,
-        showFirstLastPageButtons: false,
         paginationType: "stepped",
+        addRowPosition: "first",
+        draggable: true,
+        exportButton: true,
+        filtering: true,
+        padding: "dense",
+        searchFieldAlignment: "left",
+        toolbarButtonAlignment: "left"
     }
 
     return (
