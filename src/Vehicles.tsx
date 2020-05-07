@@ -13,32 +13,32 @@ const columns: Column<Vehicle>[] = [
 function Vehicles() {
     const tableRef = createRef<MaterialTableProps<Vehicle>>();
 
-    useEffect(() => {
-        function subscriber(msg: SubscriptionMessage<Vehicle>) {
-            console.log('subscription', msg.opType);
+    // useEffect(() => {
+    //     function subscriber(msg: SubscriptionMessage<Vehicle>) {
+    //         console.log('subscription', msg.opType);
 
-            if (tableRef.current) {
-                const table = tableRef.current;
+    //         if (tableRef.current) {
+    //             const table = tableRef.current;
 
-                if (table.onQueryChange) {
-                    table.onQueryChange({
-                        filters: [],
-                        orderBy: {},
-                        orderDirection: 'asc',
-                        page: table.page || 0,
-                        pageSize: table.options?.pageSize || 5,
-                        search: table.options?.searchText || ''
-                    });
-                }
-            }
-        };
+    //             if (table.onQueryChange) {
+    //                 table.onQueryChange({
+    //                     filters: [],
+    //                     orderBy: {},
+    //                     orderDirection: 'asc',
+    //                     page: table.page || 0,
+    //                     pageSize: table.options?.pageSize || 5,
+    //                     search: table.options?.searchText || ''
+    //                 });
+    //             }
+    //         }
+    //     };
 
-        const subscription = DataStore
-            .observe(Vehicle)
-            .subscribe(subscriber);
+    //     const subscription = DataStore
+    //         .observe(Vehicle)
+    //         .subscribe(subscriber);
 
-        return () => { subscription.unsubscribe(); };
-    }, [tableRef]);
+    //     return () => { subscription.unsubscribe(); };
+    // }, [tableRef]);
 
     function rowMapper(vehicles: Vehicle[]): Vehicle[] {
         return vehicles.map(vehicle => {
