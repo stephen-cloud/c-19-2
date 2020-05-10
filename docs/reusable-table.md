@@ -1,0 +1,1 @@
+The table's specific to vehicles. We have other screens like owners and parts. Let's make the table a component.

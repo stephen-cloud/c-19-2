@@ -34,7 +34,6 @@ If you like your Material theme dark, change your `index.tsx` to
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';

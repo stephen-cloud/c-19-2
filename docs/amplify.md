@@ -13,14 +13,19 @@ AWS Amplify is a pretty great. It lets you add lots of production quality featur
 
 ## There's already a super duper "Getting started" for Amplify
 
-So let's do some of that now.
+So let's do that now.
 
-We're going to branch out on our own when it's time to connect up the UI to the backend. That's because we're using React Material, Material Tables and have our own schema.
 
-Sp just just the following sections
+We're going to branch out on our own when it's time to create the React app (we already have one coming along) and we're going to create other integrations, like to Material UI and Material Table.
+
+!!! note
+    Everything except "Create a new React App"
 
 - [Prerequisites](https://docs.amplify.aws/start/getting-started/installation/q/integration/react#set-up-frontend)
 - [Set up fullstack project](https://docs.amplify.aws/start/getting-started/setup/q/integration/react)
+- [Connect API and database to the app](https://docs.amplify.aws/start/getting-started/data-model/q/integration/react)
+- [Add authentication](https://docs.amplify.aws/start/getting-started/auth/q/integration/react)
+- [Deploy and host app](https://docs.amplify.aws/start/getting-started/hosting/q/integration/react)
 
 Instead of editing `src/index.js`, edit `src/index.tsx` since we're using TypeScript.
 

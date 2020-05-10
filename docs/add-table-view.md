@@ -3,7 +3,7 @@ We just got the button hooked up and printed out the state. Clearly JSON is not 
 Luckily it's easy. Import more elements from `@material-ui/core`.
 
 ```typescript
-import { Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import { Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 ```
 
 Replace the `return` statement with
@@ -62,12 +62,12 @@ import { Grid } from '@material-ui/core';
 ```
 
 ```typescript
-        <Grid container spacing={2}>
-            <Button onClick={onClick}>Add vehicle</Button>
-            <Table>
-                ...
-            </Table>
-        </Grid>
+<Grid container spacing={2}>
+    <Button onClick={onClick}>Add vehicle</Button>
+    <Table>
+        ...
+    </Table>
+</Grid>
 ```
 
 Refresh. Not much difference. That's because a `<Grid container>` lays out `<Grid item>`s and we don't have any yet.
@@ -75,15 +75,16 @@ Refresh. Not much difference. That's because a `<Grid container>` lays out `<Gri
 Add the two items inside the container. 
 
 ```typescript
-        <Grid container spacing={2}>
-            <Grid item>
-                <Button onClick={onClick}>Add vehicle</Button>
-            </Grid>
-            <Grid item>
-                <Table>
-                    ...
-                </Table>
-            </Grid>
+<Grid container spacing={2}>
+    <Grid item>
+        <Button onClick={onClick}>Add vehicle</Button>
+    </Grid>
+    <Grid item>
+        <Table>
+            ...
+        </Table>
+    </Grid>
+</Grid>
 ```
 
 This lays out the button and table items side-by-side. Try resizing the screen. Things move around as the screen size changes.
@@ -218,13 +219,10 @@ And a handler
 function onDeleteAll(event: React.MouseEvent) {
     console.log('event', event);
 
-    DataStore
-        .delete(Vehicle, Predicates.ALL)
-        .then(console.log)
-        .catch(console.error);
+    setVehicles([]);
 
     event.preventDefault();
 }
 ```
 
-Suddenly, integrating UI and backend looks not as hard as we'd thought.
+We like React hooks.

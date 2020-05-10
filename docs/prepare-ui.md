@@ -23,7 +23,7 @@ The `theme` argument lets us use spacing from the theme itself. We could use har
 
 `makeStyles()` returns a function. We get the classNames from the result of calling this function. And we use it referencing the class name. Look at the `<div>` around the `<Switch>`.
 
-```typescript
+```typescript hl_lines="2 16 23"
 function App() {
   const classes = useStyles();
 
@@ -92,8 +92,6 @@ A bit of a mouthful, but it's going to be jolly useful. Specifically, we're goin
 
 ## Now add some state for the list of vehicles
 
-!!! note "All this goes in `Vehicles.tsx`."
-
 Import the new `Vehicle` class
 
 ```typescript
@@ -104,6 +102,24 @@ We maintain state using React hooks. See <https://reactjs.org/docs/hooks-overvie
 
 ```typescript
 const [vehicles, setVehicles] = React.useState<Vehicle[]>([])
+```
+
+Here is `Vehicles.tsx`
+
+```typescript hl_lines="3 6"
+import React from 'react';
+import { Typography } from '@material-ui/core';
+import { Vehicle } from './models';
+
+function Vehicles() {
+    const [vehicles, setVehicles] = React.useState<Vehicle[]>([])
+
+    return (
+        <Typography variant="h3">Vehicles</Typography>
+    );
+}
+
+export default Vehicles;
 ```
 
 We'll be using random placeholders for fields: UUIDs are just the ticket.
@@ -118,7 +134,7 @@ And import it
 import { uuid } from 'uuidv4';
 ```
 
-# Code to update the list of vehicles
+## Code to update the list of vehicles
 
 A new function, `addVehicle()`, adds a vehicle to the `vehicles` state.
 
@@ -165,7 +181,9 @@ import { Typography, Button } from '@material-ui/core';
   );
 ```
 
-Try it out. Nice. Now there's a button "ADD VEHICLE" and some JSON for all the vehicles we're adding.
+Try it out, `yarn start` as usual.
+
+Nice. Now there's a button "ADD VEHICLE" and some JSON for all the vehicles we're adding.
 
 ## The upshot
 

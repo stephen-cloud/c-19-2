@@ -1,31 +1,27 @@
 {
-	"api": {
-		"c192": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [
-						{
-							"authenticationType": "API_KEY",
-							"apiKeyConfig": {
-								"description": "demo",
-								"apiKeyExpirationDays": "300"
-							}
-						}
-					],
-					"defaultAuthentication": {
-						"authenticationType": "AWS_IAM"
-					}
-				}
-			}
-		}
-	},
-	"auth": {},
-	"hosting": {
-		"S3AndCloudFront": {
-			"service": "S3AndCloudFront",
-			"providerPlugin": "awscloudformation"
-		}
-	}
+    "api": {
+        "c192": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [],
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "description": "demo",
+                            "apiKeyExpirationDays": "300"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "auth": {},
+    "hosting": {
+        "S3AndCloudFront": {
+            "service": "S3AndCloudFront",
+            "providerPlugin": "awscloudformation"
+        }
+    }
 }

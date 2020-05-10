@@ -47,21 +47,23 @@ markdown_extensions:
 
 # Page tree
 nav:
-    - Home: index.md
-    - 1. Set things up:
+    - What's all this then?: index.md
+    - Set things up:
         - Install the tools: tools.md
         - Create the project: createproject.md
         - Add React Material: material.md
-    - 2. UI starter:
+    - Make UI starter:
         - Add navigation: navigation.md
-    - 3. Back-end starter:
+    - Make back-end starter:
         - Add AWS Amplify: amplify.md
-    - 4. Connect the UI:
+        - Authentication UI: authentication.md
+    - Connect the UI:
         - Prepare the UI: prepare-ui.md
         - Add a table: add-table-view.md
         - Connect to the back-end: connecttobackend.md
-    - 4. Make the table great:
+    - Make the table great:
         - Material Table: awesome-table.md 
+        - Make table reusable: reusable-table.md
         - Polish: table-polish.md
     - Fine print: 
         - Acknowledgements: thanks.md

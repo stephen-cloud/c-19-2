@@ -1,7 +1,11 @@
 !!! note
     You can find me at <stephen@stephen.cloud> and <https://www.linkedin.com/in/stephenharrison/> and <https://github.com/stephen-cloud/> and <https://www.thelucidcoder.com> (nothing interesting there yet.)
 
-Here is an end-to-end tutorial that shows how to create the C-19 Autobody sample application in <https://github.com/stephen-cloud/c-19-autobody> from scratch. This documentation is <https://stephen-cloud.github.io/c-19-autobody/>. You can see the finished application at <https://c-19-autobody.stephen.cloud>.
+## What's all this then?
+
+Here is an end-to-end tutorial that shows how to create the C-19 Autobody sample application in <https://github.com/stephen-cloud/c-19-autobody> from scratch. 
+
+This documentation is <https://stephen-cloud.github.io/c-19-autobody/>. You can see the finished application at <https://c-19-autobody.stephen.cloud>.
 
 You can stop at the end of each section and have something interesting working.
 
@@ -15,6 +19,7 @@ Here are the features and technologies we're using to implement in this demo.
 | Cloud-native and serverless | AWS Amplify |
 | A User Interface | React Material |
 | Sign-up, sign-in, forgot password | AWS Amplify Authentication |
+| Google, Facebook, and other social providers | Federated Authentication |
 | A back-end API | GraphQL schema definition + AWS Amplify GraphQL API |
 | A database | AWS Amplify API + AWS DynamoDB |
 | Subscribe to data changes; handle off-line edits | AWS AppSync | 

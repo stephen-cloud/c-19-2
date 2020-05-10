@@ -134,14 +134,29 @@ It's actually pretty easy now we have the stub components and the `<BrowserRoute
 Add `<Link>`s and URL paths to the `<Button>`s in the `<AppBar>`.
 
 ```typescript
-<div>
-  <Link to="/" component={Button}>Home</Link>
-  <Link to="/vehicles" component={Button}>Vehicles</Link>
-  <Link to="/owners" component={Button}>Owners</Link>
-  <Link to="/services" component={Button}>Services</Link>
-  <Link to="/parts" component={Button}>Parts</Link>
-  <Link to="/workorders" component={Button}>Work Orders</Link>
-</div>
+import { Link } from 'react-router-dom';
+```
+
+```typescript hl_lines="8 9 10 11 12 13 14 15"
+function App() {
+  return (
+    <>
+      <AppBar color="inherit" position="static">
+        <Toolbar>
+          <Typography variant="h4" >Welcome to C-19 Autobody</Typography>
+        </Toolbar>
+        <div>
+          <Link to="/" component={Button}>Home</Link>
+          <Link to="/vehicles" component={Button}>Vehicles</Link>
+          <Link to="/owners" component={Button}>Owners</Link>
+          <Link to="/services" component={Button}>Services</Link>
+          <Link to="/parts" component={Button}>Parts</Link>
+          <Link to="/workorders" component={Button}>Work Orders</Link>
+        </div>
+      </AppBar>
+    </>
+  );
+}
 ```
 
 Now add a dispatcher for the URL paths to the corresponding components.
@@ -153,17 +168,25 @@ import Home from './Home';
 import Vehicles from './Vehicles';
 ```
 
-```typescript
-<main>
-  <Switch>
-    <Route path="/" component={Home} exact />
-    <Route path="/vehicles" component={Vehicles} />
-    <Route path="/owners" component={Owners} />
-    <Route path="/services" component={Services} />
-    <Route path="/parts" component={Parts} />
-    <Route path="/workorders" component={WorkOrders} />
-  </Switch>
-</main>
+```typescript hl_lines="7 8 9 10 11 12 13 14 15 16"
+  return (
+    <>
+      <AppBar color="inherit" position="static">
+        ...
+      </AppBar>
+
+      <main>
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/vehicles" component={Vehicles} />
+          <Route path="/owners" component={Placeholder} />
+          <Route path="/services" component={Placeholder} />
+          <Route path="/parts" component={Placeholder} />
+          <Route path="/workorders" component={Placeholder} />
+        </Switch>
+      </main>
+    </>
+  );
 ```
 
 Try it with `yarn start` as usual.

@@ -14,8 +14,8 @@ function Vehicles() {
     const tableRef = createRef<MaterialTableProps<Vehicle>>();
 
     useEffect(() => {
-        function subscriber(msg: SubscriptionMessage<Vehicle>) {
-            console.log('subscription', msg.opType);
+        function subscriber(subscription: SubscriptionMessage<Vehicle>) {
+            console.log('subscription', subscription);
 
             if (tableRef.current) {
                 const table = tableRef.current;
