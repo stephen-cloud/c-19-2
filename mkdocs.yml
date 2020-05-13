@@ -20,6 +20,7 @@
 
 # Project information
 site_name: "C-19 Autobody Documentation"
+site_url: https://stephen-cloud.github.io/c-19-autobody/
 
 # Copyright
 copyright: Copyright &copy; 2020 Stephen Harrison
