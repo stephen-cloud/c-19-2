@@ -3,4 +3,24 @@ type Vehicle @model {
   make: String!
   model: String!
   mileage: Int
+  owner: Owner @connection(name: "OwnerVehicles")
 }
+
+type Owner @model {
+  id: ID!
+  name: String!
+  vehicles: [Vehicle] @connection(name: "OwnerVehicles")
+}
+
+type Part @model {
+  id: ID!
+  description: String!
+  price: Float!
+  inventory: Int
+}
+
+type Service @model {
+  id: ID!
+  name: String!
+}
+

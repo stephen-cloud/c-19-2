@@ -1,8 +1,8 @@
-import React, { useEffect, createRef } from 'react';
-import { Grid } from '@material-ui/core';
+import React from "react";
+import AwesomeTable, { OverrideProps } from './AwesomeTable';
+import { Column, Query, Options } from 'material-table';
 import { Vehicle } from './models';
-import { DataStore, SubscriptionMessage, ModelPredicate } from '@aws-amplify/datastore';
-import MaterialTable, { Column, Query, QueryResult, MaterialTableProps, Options } from 'material-table'
+import { ModelPredicate } from '@aws-amplify/datastore';
 
 const columns: Column<Vehicle>[] = [
     { title: 'Make', field: 'make' },
@@ -10,162 +10,42 @@ const columns: Column<Vehicle>[] = [
     { title: 'Mileage', field: 'mileage', type: "numeric", emptyValue: '' },
 ];
 
-function Vehicles() {
-    const tableRef = createRef<MaterialTableProps<Vehicle>>();
+function searchCriteria(
+    query: Query<Vehicle>,
+    predicate: ModelPredicate<Vehicle>
+): ModelPredicate<Vehicle> {
+    return predicate.or(or =>
+        or.make("contains", query.search)
+            .model("contains", query.search)
+            .mileage("ge", parseInt(query.search, 10)));
+}
 
-    useEffect(() => {
-        function subscriber(subscription: SubscriptionMessage<Vehicle>) {
-            console.log('subscription', subscription);
+function instanceFor(newData: any): Vehicle {
+    return new Vehicle({
+        make: newData.make,
+        model: newData.model,
+        mileage: parseInt(newData.mileage, 10)
+    });
+}
 
-            if (tableRef.current) {
-                const table = tableRef.current;
+function updater(original: Vehicle, newData: any) {
+    return Vehicle.copyOf(original, updated => {
+        updated.make = newData.make
+        updated.model = newData.model
+        updated.mileage = parseInt(newData.mileage, 10)
+    });
+}
 
-                if (table.onQueryChange) {
-                    table.onQueryChange({
-                        filters: [],
-                        orderBy: {},
-                        orderDirection: 'asc',
-                        page: table.page || 0,
-                        pageSize: table.options?.pageSize || 5,
-                        search: table.options?.searchText || ''
-                    });
-                }
-            }
-        };
-
-        const subscription = DataStore
-            .observe(Vehicle)
-            .subscribe(subscriber);
-
-        return () => { subscription.unsubscribe(); };
-    }, [tableRef]);
-
-    function rowMapper(vehicles: Vehicle[]): Vehicle[] {
-        return vehicles.map(vehicle => {
-            return { ...vehicle }
-        });
-    }
-
-    function data(query: Query<Vehicle>): Promise<QueryResult<Vehicle>> {
-        return new Promise((resolve, reject) => {
-            const thisPage = {
-                page: query.page,
-                limit: query.pageSize
-            };
-
-            function searchCriteria(predicate: ModelPredicate<Vehicle>): ModelPredicate<Vehicle> {
-                return predicate.or(or =>
-                    or.make("contains", query.search)
-                        .model("contains", query.search)
-                        .mileage("ge", parseInt(query.search, 10)));
-            }
-
-            DataStore
-                .query(Vehicle, searchCriteria, thisPage)
-                .then(vehicles => {
-                    resolve({
-                        data: rowMapper(vehicles),
-                        page: query.page,
-                        totalCount: 1000000
-                    });
-                })
-                .catch(reject);
-        })
-    }
-
-    const onRowAdd = (newData: any) =>
-        new Promise((resolve, reject) => {
-            const timeout = setTimeout(() => {
-                const add = new Vehicle({
-                    make: newData.make,
-                    model: newData.model,
-                    mileage: parseInt(newData.mileage, 10)
-                });
-                DataStore
-                    .save(add)
-                    .then(result => {
-                        clearTimeout(timeout)
-
-                        resolve(result);
-                    })
-                    .catch(reject)
-            }, 1000);
-        })
-
-    const onRowDelete = (oldData: any) =>
-        new Promise((resolve, reject) => {
-            const timeout = setTimeout(() => {
-                DataStore
-                    .delete(Vehicle, oldData.id)
-                    .then(result => {
-                        clearTimeout(timeout)
-
-                        resolve(result);
-                    })
-                    .catch(reject)
-            }, 1000);
-        })
-
-    const onRowUpdate = (newData: any, oldData: any) =>
-        new Promise((resolve, reject) => {
-            const timeout = setTimeout(() => {
-                DataStore
-                    .query(Vehicle, oldData.id)
-                    .then(original => {
-                        const updated = Vehicle.copyOf(original, updated => {
-                            updated.make = newData.make
-                            updated.model = newData.model
-                            updated.mileage = parseInt(newData.mileage, 10)
-                        });
-
-                        return DataStore.save(updated);
-                    })
-                    .then(result => {
-                        clearTimeout(timeout)
-
-                        resolve(result);
-                    })
-                    .catch(reject)
-            }, 1000);
-        })
-
-    const editable = {
-        onRowAdd,
-        onRowDelete,
-        onRowUpdate
-    }
-
-    const localization = {
-        pagination: {
-            labelDisplayedRows: '{from}-{to}'
-        }
-    }
-
-    const options: Options = {
-        showTitle: false,
-        paginationType: "stepped",
-        addRowPosition: "first",
-        draggable: true,
-        exportButton: true,
-        filtering: true,
-        padding: "dense",
-        searchFieldAlignment: "left",
-        toolbarButtonAlignment: "left"
-    }
-
+function Vehicles(props: OverrideProps) {
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
-                <MaterialTable
-                    tableRef={tableRef}
-                    data={data}
-                    columns={columns}
-                    editable={editable}
-                    localization={localization}
-                    options={options}
-                />
-            </Grid>
-        </Grid>
+        <AwesomeTable
+            model={Vehicle}
+            columns={columns}
+            searchCriteria={searchCriteria}
+            instanceFor={instanceFor}
+            updater={updater}
+            overrides={props}
+        />
     );
 }
 

@@ -5,6 +5,9 @@ import Home from './Home';
 import Vehicles from './Vehicles';
 import Placeholder from './Placeholder';
 import { makeStyles } from '@material-ui/core';
+import Owners from './Owners';
+import Parts from './Parts';
+import Services from './Services';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -37,9 +40,9 @@ function App() {
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/vehicles" component={Vehicles} />
-            <Route path="/owners" component={Placeholder} />
-            <Route path="/services" component={Placeholder} />
-            <Route path="/parts" component={Placeholder} />
+            <Route path="/owners" component={Owners} />
+            <Route path="/services" component={Services} />
+            <Route path="/parts" component={Parts} />
             <Route path="/workorders" component={Placeholder} />
           </Switch>
         </main>

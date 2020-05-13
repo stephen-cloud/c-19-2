@@ -8,6 +8,7 @@ export type CreateVehicleInput = {
   model: string,
   mileage?: number | null,
   _version?: number | null,
+  vehicleOwnerId?: string | null,
 };
 
 export type ModelVehicleConditionInput = {
@@ -77,9 +78,112 @@ export type UpdateVehicleInput = {
   model?: string | null,
   mileage?: number | null,
   _version?: number | null,
+  vehicleOwnerId?: string | null,
 };
 
 export type DeleteVehicleInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreateOwnerInput = {
+  id?: string | null,
+  name: string,
+  vehicles?: Array< VehicleInput | null > | null,
+  _version?: number | null,
+};
+
+export type VehicleInput = {
+  id: string,
+  make: string,
+  model: string,
+  mileage?: number | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type ModelOwnerConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelOwnerConditionInput | null > | null,
+  or?: Array< ModelOwnerConditionInput | null > | null,
+  not?: ModelOwnerConditionInput | null,
+};
+
+export type UpdateOwnerInput = {
+  id: string,
+  name?: string | null,
+  vehicles?: Array< VehicleInput | null > | null,
+  _version?: number | null,
+};
+
+export type DeleteOwnerInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreatePartInput = {
+  id?: string | null,
+  description: string,
+  price: number,
+  inventory?: number | null,
+  _version?: number | null,
+};
+
+export type ModelPartConditionInput = {
+  description?: ModelStringInput | null,
+  price?: ModelFloatInput | null,
+  inventory?: ModelIntInput | null,
+  and?: Array< ModelPartConditionInput | null > | null,
+  or?: Array< ModelPartConditionInput | null > | null,
+  not?: ModelPartConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type UpdatePartInput = {
+  id: string,
+  description?: string | null,
+  price?: number | null,
+  inventory?: number | null,
+  _version?: number | null,
+};
+
+export type DeletePartInput = {
+  id?: string | null,
+  _version?: number | null,
+};
+
+export type CreateServiceInput = {
+  id?: string | null,
+  name: string,
+  _version?: number | null,
+};
+
+export type ModelServiceConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelServiceConditionInput | null > | null,
+  or?: Array< ModelServiceConditionInput | null > | null,
+  not?: ModelServiceConditionInput | null,
+};
+
+export type UpdateServiceInput = {
+  id: string,
+  name?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteServiceInput = {
   id?: string | null,
   _version?: number | null,
 };
@@ -110,6 +214,32 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type ModelOwnerFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelOwnerFilterInput | null > | null,
+  or?: Array< ModelOwnerFilterInput | null > | null,
+  not?: ModelOwnerFilterInput | null,
+};
+
+export type ModelPartFilterInput = {
+  id?: ModelIDInput | null,
+  description?: ModelStringInput | null,
+  price?: ModelFloatInput | null,
+  inventory?: ModelIntInput | null,
+  and?: Array< ModelPartFilterInput | null > | null,
+  or?: Array< ModelPartFilterInput | null > | null,
+  not?: ModelPartFilterInput | null,
+};
+
+export type ModelServiceFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelServiceFilterInput | null > | null,
+  or?: Array< ModelServiceFilterInput | null > | null,
+  not?: ModelServiceFilterInput | null,
+};
+
 export type CreateVehicleMutationVariables = {
   input: CreateVehicleInput,
   condition?: ModelVehicleConditionInput | null,
@@ -122,6 +252,19 @@ export type CreateVehicleMutation = {
     make: string,
     model: string,
     mileage: number | null,
+    owner:  {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -140,6 +283,19 @@ export type UpdateVehicleMutation = {
     make: string,
     model: string,
     mileage: number | null,
+    owner:  {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -158,6 +314,214 @@ export type DeleteVehicleMutation = {
     make: string,
     model: string,
     mileage: number | null,
+    owner:  {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateOwnerMutationVariables = {
+  input: CreateOwnerInput,
+  condition?: ModelOwnerConditionInput | null,
+};
+
+export type CreateOwnerMutation = {
+  createOwner:  {
+    __typename: "Owner",
+    id: string,
+    name: string,
+    vehicles:  {
+      __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null > | null,
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateOwnerMutationVariables = {
+  input: UpdateOwnerInput,
+  condition?: ModelOwnerConditionInput | null,
+};
+
+export type UpdateOwnerMutation = {
+  updateOwner:  {
+    __typename: "Owner",
+    id: string,
+    name: string,
+    vehicles:  {
+      __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null > | null,
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteOwnerMutationVariables = {
+  input: DeleteOwnerInput,
+  condition?: ModelOwnerConditionInput | null,
+};
+
+export type DeleteOwnerMutation = {
+  deleteOwner:  {
+    __typename: "Owner",
+    id: string,
+    name: string,
+    vehicles:  {
+      __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null > | null,
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreatePartMutationVariables = {
+  input: CreatePartInput,
+  condition?: ModelPartConditionInput | null,
+};
+
+export type CreatePartMutation = {
+  createPart:  {
+    __typename: "Part",
+    id: string,
+    description: string,
+    price: number,
+    inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdatePartMutationVariables = {
+  input: UpdatePartInput,
+  condition?: ModelPartConditionInput | null,
+};
+
+export type UpdatePartMutation = {
+  updatePart:  {
+    __typename: "Part",
+    id: string,
+    description: string,
+    price: number,
+    inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeletePartMutationVariables = {
+  input: DeletePartInput,
+  condition?: ModelPartConditionInput | null,
+};
+
+export type DeletePartMutation = {
+  deletePart:  {
+    __typename: "Part",
+    id: string,
+    description: string,
+    price: number,
+    inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateServiceMutationVariables = {
+  input: CreateServiceInput,
+  condition?: ModelServiceConditionInput | null,
+};
+
+export type CreateServiceMutation = {
+  createService:  {
+    __typename: "Service",
+    id: string,
+    name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateServiceMutationVariables = {
+  input: UpdateServiceInput,
+  condition?: ModelServiceConditionInput | null,
+};
+
+export type UpdateServiceMutation = {
+  updateService:  {
+    __typename: "Service",
+    id: string,
+    name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteServiceMutationVariables = {
+  input: DeleteServiceInput,
+  condition?: ModelServiceConditionInput | null,
+};
+
+export type DeleteServiceMutation = {
+  deleteService:  {
+    __typename: "Service",
+    id: string,
+    name: string,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -180,6 +544,14 @@ export type SyncVehiclesQuery = {
       make: string,
       model: string,
       mileage: number | null,
+      owner:  {
+        __typename: "Owner",
+        id: string,
+        name: string,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -200,6 +572,19 @@ export type GetVehicleQuery = {
     make: string,
     model: string,
     mileage: number | null,
+    owner:  {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -221,6 +606,225 @@ export type ListVehiclesQuery = {
       make: string,
       model: string,
       mileage: number | null,
+      owner:  {
+        __typename: "Owner",
+        id: string,
+        name: string,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncOwnersQueryVariables = {
+  filter?: ModelOwnerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncOwnersQuery = {
+  syncOwners:  {
+    __typename: "ModelOwnerConnection",
+    items:  Array< {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetOwnerQueryVariables = {
+  id: string,
+};
+
+export type GetOwnerQuery = {
+  getOwner:  {
+    __typename: "Owner",
+    id: string,
+    name: string,
+    vehicles:  {
+      __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null > | null,
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListOwnersQueryVariables = {
+  filter?: ModelOwnerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListOwnersQuery = {
+  listOwners:  {
+    __typename: "ModelOwnerConnection",
+    items:  Array< {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncPartsQueryVariables = {
+  filter?: ModelPartFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncPartsQuery = {
+  syncParts:  {
+    __typename: "ModelPartConnection",
+    items:  Array< {
+      __typename: "Part",
+      id: string,
+      description: string,
+      price: number,
+      inventory: number | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetPartQueryVariables = {
+  id: string,
+};
+
+export type GetPartQuery = {
+  getPart:  {
+    __typename: "Part",
+    id: string,
+    description: string,
+    price: number,
+    inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListPartsQueryVariables = {
+  filter?: ModelPartFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPartsQuery = {
+  listParts:  {
+    __typename: "ModelPartConnection",
+    items:  Array< {
+      __typename: "Part",
+      id: string,
+      description: string,
+      price: number,
+      inventory: number | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncServicesQueryVariables = {
+  filter?: ModelServiceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncServicesQuery = {
+  syncServices:  {
+    __typename: "ModelServiceConnection",
+    items:  Array< {
+      __typename: "Service",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type GetServiceQueryVariables = {
+  id: string,
+};
+
+export type GetServiceQuery = {
+  getService:  {
+    __typename: "Service",
+    id: string,
+    name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListServicesQueryVariables = {
+  filter?: ModelServiceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListServicesQuery = {
+  listServices:  {
+    __typename: "ModelServiceConnection",
+    items:  Array< {
+      __typename: "Service",
+      id: string,
+      name: string,
       _version: number,
       _deleted: boolean | null,
       _lastChangedAt: number,
@@ -237,6 +841,19 @@ export type OnCreateVehicleSubscription = {
     make: string,
     model: string,
     mileage: number | null,
+    owner:  {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -250,6 +867,19 @@ export type OnUpdateVehicleSubscription = {
     make: string,
     model: string,
     mileage: number | null,
+    owner:  {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,
@@ -263,6 +893,169 @@ export type OnDeleteVehicleSubscription = {
     make: string,
     model: string,
     mileage: number | null,
+    owner:  {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreateOwnerSubscription = {
+  onCreateOwner:  {
+    __typename: "Owner",
+    id: string,
+    name: string,
+    vehicles:  {
+      __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null > | null,
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateOwnerSubscription = {
+  onUpdateOwner:  {
+    __typename: "Owner",
+    id: string,
+    name: string,
+    vehicles:  {
+      __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null > | null,
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteOwnerSubscription = {
+  onDeleteOwner:  {
+    __typename: "Owner",
+    id: string,
+    name: string,
+    vehicles:  {
+      __typename: "ModelVehicleConnection",
+      items:  Array< {
+        __typename: "Vehicle",
+        id: string,
+        make: string,
+        model: string,
+        mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+      } | null > | null,
+      nextToken: string | null,
+      startedAt: number | null,
+    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreatePartSubscription = {
+  onCreatePart:  {
+    __typename: "Part",
+    id: string,
+    description: string,
+    price: number,
+    inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdatePartSubscription = {
+  onUpdatePart:  {
+    __typename: "Part",
+    id: string,
+    description: string,
+    price: number,
+    inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeletePartSubscription = {
+  onDeletePart:  {
+    __typename: "Part",
+    id: string,
+    description: string,
+    price: number,
+    inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnCreateServiceSubscription = {
+  onCreateService:  {
+    __typename: "Service",
+    id: string,
+    name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateServiceSubscription = {
+  onUpdateService:  {
+    __typename: "Service",
+    id: string,
+    name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteServiceSubscription = {
+  onDeleteService:  {
+    __typename: "Service",
+    id: string,
+    name: string,
     _version: number,
     _deleted: boolean | null,
     _lastChangedAt: number,

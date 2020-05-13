@@ -103,7 +103,7 @@ Nice.
 ## Make a login screen for React Material
 
 !!! note
-    There's a lot written about this. But none of it quite works for React Material, or works at with hte vewsions of Amplify and REact we're using here. See [Here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/), [here](https://blog.kylegalbraith.com/2020/03/31/customizing-the-aws-amplify-authentication-ui-with-your-own-react-components/), [here](<https://medium.com/@howitson/how-i-managed-to-customize-aws-amplify-login-screens-8d85d0967849>), [here](https://dev.to/dabit3/the-complete-guide-to-user-authentication-with-the-amplify-framework-2inh), and [here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/) for some of the closest we found. There are many more.
+    There's a lot written about this. But none of it quite works for React Material, or works at with hte versions of Amplify and REact we're using here. See [Here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/), [here](https://blog.kylegalbraith.com/2020/03/31/customizing-the-aws-amplify-authentication-ui-with-your-own-react-components/), [here](<https://medium.com/@howitson/how-i-managed-to-customize-aws-amplify-login-screens-8d85d0967849>), [here](https://dev.to/dabit3/the-complete-guide-to-user-authentication-with-the-amplify-framework-2inh), and [here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/) for some of the closest we found. There are many more.
 
 ## Use the hosted federated login
 

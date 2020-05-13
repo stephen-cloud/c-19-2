@@ -12,6 +12,17 @@ export const createVehicle = /* GraphQL */ `
       make
       model
       mileage
+      owner {
+        id
+        name
+        vehicles {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -28,6 +39,17 @@ export const updateVehicle = /* GraphQL */ `
       make
       model
       mileage
+      owner {
+        id
+        name
+        vehicles {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+      }
       _version
       _deleted
       _lastChangedAt
@@ -44,6 +66,188 @@ export const deleteVehicle = /* GraphQL */ `
       make
       model
       mileage
+      owner {
+        id
+        name
+        vehicles {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createOwner = /* GraphQL */ `
+  mutation CreateOwner(
+    $input: CreateOwnerInput!
+    $condition: ModelOwnerConditionInput
+  ) {
+    createOwner(input: $input, condition: $condition) {
+      id
+      name
+      vehicles {
+        items {
+          id
+          make
+          model
+          mileage
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateOwner = /* GraphQL */ `
+  mutation UpdateOwner(
+    $input: UpdateOwnerInput!
+    $condition: ModelOwnerConditionInput
+  ) {
+    updateOwner(input: $input, condition: $condition) {
+      id
+      name
+      vehicles {
+        items {
+          id
+          make
+          model
+          mileage
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteOwner = /* GraphQL */ `
+  mutation DeleteOwner(
+    $input: DeleteOwnerInput!
+    $condition: ModelOwnerConditionInput
+  ) {
+    deleteOwner(input: $input, condition: $condition) {
+      id
+      name
+      vehicles {
+        items {
+          id
+          make
+          model
+          mileage
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createPart = /* GraphQL */ `
+  mutation CreatePart(
+    $input: CreatePartInput!
+    $condition: ModelPartConditionInput
+  ) {
+    createPart(input: $input, condition: $condition) {
+      id
+      description
+      price
+      inventory
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updatePart = /* GraphQL */ `
+  mutation UpdatePart(
+    $input: UpdatePartInput!
+    $condition: ModelPartConditionInput
+  ) {
+    updatePart(input: $input, condition: $condition) {
+      id
+      description
+      price
+      inventory
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deletePart = /* GraphQL */ `
+  mutation DeletePart(
+    $input: DeletePartInput!
+    $condition: ModelPartConditionInput
+  ) {
+    deletePart(input: $input, condition: $condition) {
+      id
+      description
+      price
+      inventory
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createService = /* GraphQL */ `
+  mutation CreateService(
+    $input: CreateServiceInput!
+    $condition: ModelServiceConditionInput
+  ) {
+    createService(input: $input, condition: $condition) {
+      id
+      name
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateService = /* GraphQL */ `
+  mutation UpdateService(
+    $input: UpdateServiceInput!
+    $condition: ModelServiceConditionInput
+  ) {
+    updateService(input: $input, condition: $condition) {
+      id
+      name
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteService = /* GraphQL */ `
+  mutation DeleteService(
+    $input: DeleteServiceInput!
+    $condition: ModelServiceConditionInput
+  ) {
+    deleteService(input: $input, condition: $condition) {
+      id
+      name
       _version
       _deleted
       _lastChangedAt

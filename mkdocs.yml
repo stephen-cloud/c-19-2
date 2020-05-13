@@ -1,4 +1,4 @@
-# Copyright (c) 2020 Stephen Harrison, stephen@harrison.org
+# Copyright (c) 2020 Stephen Harrison, stephen@stephen.cloud
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to
@@ -26,46 +26,55 @@ copyright: Copyright &copy; 2020 Stephen Harrison
 
 # Configuration
 theme:
-  name: material
-  logo: assets/ic_build_white_48dp.png
-  language: en
-  features:
-    - tabs
+    name: material
+    logo: assets/ic_build_white_48dp.png
+    language: en
+    features:
+        - tabs
+
+# Extras
+
+extra:
+  disqus: c19-autobody
 
 # Plugins
 plugins:
-  - search
-
-  # Extensions
+    - search
+    # Extensions
 markdown_extensions:
     - toc:
-        permalink: true
+          permalink: true
     - admonition
     - codehilite:
-        guess_lang: false
+          guess_lang: false
     - footnotes
 
 # Page tree
 nav:
     - What's all this then?: index.md
     - Set things up:
-        - Install the tools: tools.md
-        - Create the project: createproject.md
-        - Add React Material: material.md
+      - Install the tools: tools.md
+      - Create the project: create-project.md
+      - Add React Material: material.md
     - Make UI starter:
-        - Add navigation: navigation.md
+          - Add navigation: navigation.md
     - Make back-end starter:
-        - Add AWS Amplify: amplify.md
-        - Authentication UI: authentication.md
+          - Add AWS Amplify: amplify.md
+          - Authentication UI: authentication.md
     - Connect the UI:
-        - Prepare the UI: prepare-ui.md
-        - Add a table: add-table-view.md
-        - Connect to the back-end: connecttobackend.md
+          - Prepare the UI: prepare-ui.md
+          - Add a table: add-table-view.md
+          - Connect to the back-end: connect-to-backend.md
     - Make the table great:
-        - Material Table: awesome-table.md 
-        - Make table reusable: reusable-table.md
-        - Polish: table-polish.md
-    - Fine print: 
-        - Acknowledgements: thanks.md
-        - Release notes: releasenotes.md
-        - License: license.md
+          - Material Table: awesome-table.md
+          - Make table reusable: reusable-table.md
+          - Create the rest of the screens: use-reusable-table.md
+          - Add model relationships: add-relations.md
+          - Polish: table-polish.md
+    - DevOps:
+          - Deploy to the cloud: nope.md
+    - Testing: nope.md
+    - Fine print:
+          - Acknowledgements: thanks.md
+          - Release notes: release-notes.md
+          - License: license.md
