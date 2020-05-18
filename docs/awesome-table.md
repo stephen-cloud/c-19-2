@@ -1,4 +1,6 @@
-As we already saw, the table that displays all the vehicles is lame. It does not paginate and it only works on all the vehicles at once. It does not let you create, update, or update the data within the table. In addition, we had to create the table from scratch using the basic elements of Material UI. Let's fix that. Or rather, let someone else fix it for us. Enter the magnificent Material Table, <https://material-table.com>. 
+As we already saw, the table that displays all the vehicles is lame. It does not paginate and it only works on all the vehicles at once. It does not let you create, update, or delete data within the table. In addition, we had to create the table from scratch using the basic elements of Material UI. 
+
+Let's fix that. Or better still, let someone else fix it for us. Enter the magnificent Material Table, <https://material-table.com>. 
 
 We're just about to make some big changes to `Vehicle.tsx` with quite a few steps. As always, if you want to skip the steps and see the end result check "The upshot" section.
 
@@ -50,9 +52,9 @@ return (
 );
 ```
 
-Try it. Ugh. We broke something and the page is blank.
+Try it. Ugh. We broke something and the page is blank. Let's check the console.
 
-Material Table requires a mutable `id` on each row. AWS Amplify provides a different `id`, but it's `readonly`. So things won't work if you just pass a `Vehicle` around for rows. A quick fix is map each `Vehicle` to an untyped object. I found this out and figured out the fix so you don't have to.
+Material Table requires a mutable `id` on each row. AWS Amplify provides a different `id`, but it's `readonly`. So things won't work if you just pass a `Vehicle` around for rows. A quick fix is map each `Vehicle` to an untyped object. I chased this down and figured out the fix so you don't have to.
 
 The function `rowMapper(...)` does this.
 
@@ -81,23 +83,23 @@ return (
     </Grid>
 );
 ```
-Try it again. Ugh. Although Material Table is already looking promising, it looks like we need some icons. 
+Try it again. Ugh. Although Material Table is showing promise, it looks like we need some icons. 
 
 ![Material Table Broken Icons](./assets/screenshots/material-table-broken-icons.png)
 
 Follow the instructions in <https://material-table.com/#/docs/install>.
 
-Yay. This table's looking properly amazing. Search works for string and numeric fields. 
+Yay. This table's looking properly amazing now. Search works for string and numeric fields. 
 
 ![Material Table Starter](./assets/screenshots/material-table-starter.png)
 
 ## But of course we're not stopping here
 
-We're not, because this is a tutorial on Material Table and how to integrate with AWS Amplify. There's still lots to do before we're awesome.
+We're not, because this is a tutorial about React Material UI, Material Table and how to integrate with AWS Amplify. There's still lots to do before we're awesome.
 
-Try pressing the "ADD VEHICLE" button. See the total increase? Cool. Press it 1,000 more times. It slows down. A lot. Retrieving all the vehicles every time clearly doesn't work. Not so cool.
+Try pressing the "ADD VEHICLE" button. See the total increase? Cool. Press it 1,000 more times. It slows down. A lot. Retrieving all the vehicles every time clearly doesn't scale. Not so cool.
 
-Let's paginate. But first—in a bold move bordering on reckless—remove the `vehicles` state and the `fetchAll()` function. Comment it out in `subscriber()`. We're going need something here, and this will remind us.
+Let's paginate. But first — in a bold move bordering on reckless — remove the `vehicles` state and the `fetchAll()` function. Comment it out in `subscriber()`. We're clearly going need something here, and this will remind us.
 
 `function Vehicles()` now starts
 
@@ -231,12 +233,14 @@ We see there's a default title that's not very useful. Let's leave all the polis
 
 We can add vehicles as before, but they're not showing up in the table. We need to connect the subscription to the table. 
 
-It's pretty easy if you know how. We need to add a reference to the table so we can use to trigger a refresh.
+It's pretty easy if you know how. We need to bind the table to a reference and use that to trigger a refresh.
 
 ```typescript
 import React, { useEffect, createRef } from 'react';
 import MaterialTable, { Column, Query, QueryResult, MaterialTableProps } from 'material-table'
 ```
+
+Add the reference.
 
 ```typescript
 const tableRef = createRef<MaterialTableProps<Vehicle>>();
@@ -311,31 +315,16 @@ function onDeleteAll(event: React.MouseEvent) {
 }
 ```
 
-But the bloom is off the rose whe we ca see just how much we're redrawing of the table. We'll see if we can fix that later when we polish.
+Frankly, the bloom's off the rose when we notice just how much we're redrawing of the table. We'll see if we can fix that later when we polish. It's probably because we're handling all events the same. Maybe we shouldn't. We'll see.
 
 ## Manipulating items from the table itself
 
 !!! note
-    If you want to skip the details of making rows editable, fast-forward to [The upshot](#the-upshot). It's quite a bit of faffing about for here.
+    If you want to skip the details of making rows editable, fast-forward to [The upshot](#the-upshot). There's quite a bit of faffing about from here on.
 
 The "ADD VEHICLE" button has a bunch of issues. Let's move that functionality to the table. Removing buttons simplifies the layout.
 
-```typescript
-return (
-    <Grid container spacing={2}>
-        <Grid item xs={12}>
-            <MaterialTable
-                tableRef={tableRef}
-                data={data}
-                columns={columns}
-                editable={editable}
-            />
-        </Grid>
-    </Grid>
-);
-```
-
-Material Table provides hooks for CRUD operations right in the table. The hooks are defined as
+Material Table provides hooks for CRUD operations right in the table. The hooks are defined like this
 
 ```typescript
   editable?: {
@@ -363,9 +352,24 @@ const editable = {
 />
 ```
 
-Test it. Nothing does nothing successfully.
+```typescript
+return (
+    <Grid container spacing={2}>
+        <Grid item xs={12}>
+            <MaterialTable
+                tableRef={tableRef}
+                data={data}
+                columns={columns}
+                editable={editable}
+            />
+        </Grid>
+    </Grid>
+);
+```
 
-Before we can edit a row that has optional fields—our `mileage` field—we need to define a value returned when omitted. This is easy: Just add it to the `Column`.
+Test it. Nothing did nothing successfully.
+
+Before we can edit a row that has optional fields — our `mileage` field — we need to define a value returned when omitted. This is easy: Just add it to the `Column` definition.
 
 ```typescript
 const columns: Column<Vehicle>[] = [
@@ -377,7 +381,7 @@ const columns: Column<Vehicle>[] = [
 
 ## Adding a row
 
-Add a function to edit a row. We get _save_ and _cancel_ buttons for free.
+Add a function to edit a row. We get save and cancel buttons for free.
 
 ```typescript
 const onRowAdd = (newData: Vehicle) =>

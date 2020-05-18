@@ -18,7 +18,7 @@ type Vehicle @model {
 type Owner @model {
   id: ID!
   name: String!
-  vehicles: [Vehicle] @connection(name: "OwnerVehicles")
+  vehicles: [Vehicle]! @connection(name: "OwnerVehicles")
 }
 
 type Part @model {
@@ -37,6 +37,8 @@ type Service @model {
 ```shell
 amplify codegen models
 ```
+
+There's a nuance here. GraphQL does not support a relationship where both sides of the relation are optional. So it makes sense to own a list of vehicles including an empty list. And then a vehicle either has an owner or not.
 
 Take a look at what we changed
 
@@ -250,6 +252,6 @@ We need at least a couple of things
 
 Let's start with selection.
 
-We don't want all tables to be selectable by default—just the tables for relationships—so we need to pass that option.
+We don't want all tables to be selectable by default — just the tables for relationships — so we need to pass that option.
 
 

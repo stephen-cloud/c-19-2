@@ -1,4 +1,4 @@
-To get going with this tutorial, you'll need some tools. Please follow the links for instructions. Then come back here where we'll kick the tires to see whether the setup worked.
+To get going with this tutorial, you'll need some tools. Please follow the links for instructions. Then come back here where we'll kick the tires to see whether your setup works.
 
 ## Install
 
@@ -14,9 +14,18 @@ To get going with this tutorial, you'll need some tools. Please follow the links
 
 ## Did the installations work?
 
-No let's check everything opens and shuts.
+Now let's check everything opens and shuts.
 
 ### AWS account
+
+!!! danger "SET UP A BILLING ALARM"
+    The very first thing you need to do is set up a [billing alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html). 
+    
+    Do it now.
+    
+    Not that anything you do in this tutorial is likely to run up more than a penny or two. But just in case we're wrong or you go rogue, you need to know.
+
+    So even though we tested this out, WE ARE NOT RESPONSIBLE FOR ANY AWS CHARGES.
 
 You will have the file `~/.aws/credentials` after an AWS account has been set up. 
 
@@ -25,7 +34,7 @@ It looks like
 ```
 [default]
 aws_access_key_id=YOUMUSTBEKIDDING
-aws_secret_access_key=GETYOUROWNLEYS
+aws_secret_access_key=GETYOUROWNKEYS
 ```
 
 Test whether the AWS CLI works
@@ -76,8 +85,12 @@ You should see
  
 ## The upshot
 
-... TBD
+This whole tutorial uses some basic tools to get started. If you have the above, you can install everything else you need.
 
-!!! todo
+Nice work, tutorial-following person.
+
+!!! To-do
     Links to fixing installation failures.
+
+
  

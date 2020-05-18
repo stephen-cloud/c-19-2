@@ -1,5 +1,45 @@
 export const schema = {
     "models": {
+        "Owner": {
+            "name": "Owner",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "vehicles": {
+                    "name": "vehicles",
+                    "isArray": true,
+                    "type": {
+                        "model": "Vehicle"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "ownerVehiclesId"
+                    }
+                }
+            },
+            "syncable": true,
+            "pluralName": "Owners",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                }
+            ]
+        },
         "Vehicle": {
             "name": "Vehicle",
             "fields": {
@@ -8,6 +48,13 @@ export const schema = {
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "ownerID": {
+                    "name": "ownerID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "make": {
@@ -43,50 +90,17 @@ export const schema = {
                         "connectionType": "BELONGS_TO",
                         "targetName": "vehicleOwnerId"
                     }
+                },
+                "ownerVehiclesId": {
+                    "name": "ownerVehiclesId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
             "pluralName": "Vehicles",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                }
-            ]
-        },
-        "Owner": {
-            "name": "Owner",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "vehicles": {
-                    "name": "vehicles",
-                    "isArray": true,
-                    "type": {
-                        "model": "Vehicle"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "owner"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "Owners",
             "attributes": [
                 {
                     "type": "model",
@@ -165,5 +179,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "8b8f1de238359d37326263d860cdcd3f"
+    "version": "ac5030f73e902a712b40bbc8287c3be1"
 };

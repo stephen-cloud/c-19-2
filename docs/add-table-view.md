@@ -6,6 +6,18 @@ Luckily it's easy. Import more elements from `@material-ui/core`.
 import { Button, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 ```
 
+Add an `onClick` handler
+
+```typescript
+function onClick(event: React.MouseEvent) {
+    console.log('event', event);
+
+    addVehicle();
+
+    event.preventDefault();
+}
+```
+
 Replace the `return` statement with
 
 ```typescript
@@ -49,9 +61,9 @@ Try it. Not bad. But there's more.
 
 ## Layout likes to be on a grid
 
-Responsive UI frameworks are usually based around the idea of layout in twelve columns. React is one of those frameworks.
+Responsive UI frameworks are usually based around the idea of layout in twelve columns. React Material UI is one of those frameworks.
 
-The layout of the page without a grid is actually OK. If we had lots of elements it might be hard to add all the spacing by hand to get things even. And if we didn't like it there'd be lots of place to change it. We can control all the layout you need with grids.
+The layout of the page without a grid is actually OK. If we had lots of elements it might be hard to add all the spacing by hand to get things even. And if we didn't like it there'd be lots of places to change it. We can control all the layout you need with grids.
 
 Another thing's irksome. The button's always on a line on its own, even when the page is wide enough to have the button on the left and the table in the remaining space. There's room. Let's do it.
 
@@ -91,7 +103,7 @@ This lays out the button and table items side-by-side. Try resizing the screen. 
 
 We want to lay out grid items in an actual grid. We saw the default for `<Grid item>` is to flow items. That's really not very gridy.
 
-We can specify _breakpoint values_ for items (any number of `xs`, `sm`, `md`, `lg`, and `xl` values) with a column span, which can be `1` (1 column) through `12` (the whole row.) Each breakpoint defines the behavior of responsive design, the way page layout changes to accommodate different screen sizes.
+We can specify breakpoint values for items (any number of `xs`, `sm`, `md`, `lg`, and `xl` values) with a column span, which can be `1` (1 column) through `12` (the whole row). Each breakpoint defines the behavior of responsive design, the way page layout changes to accommodate different screen sizes.
 
 !!! info
     See <https://material-ui.com/customization/breakpoints/> for the details.
@@ -122,15 +134,9 @@ Try waggling the bottom-right corner of the browser around to see the button and
 
 We built a super simple application that has a UI and a backend.
 
-We see how the application is synchronized across all open browsers.
-
 We're starting to use responsive design.
 
-iPad portrait
-
 ![Basic iPad portrait](./assets/screenshots/basic-ipad-portrait.png)
-
-iPad landscape
 
 ![Basic iPad landscape](./assets/screenshots/basic-ipad-landscape.png)
 
@@ -200,7 +206,7 @@ function Vehicles() {
 export default Vehicles;
 ```
 
-Now we're going to integrate the UI we just made with the backend database.
+Next we're going to integrate the UI we just made with the backend database.
 
 ### Adding a "delete all" button is easy
 

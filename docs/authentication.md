@@ -1,12 +1,14 @@
 !!! warning
     Authentication is a bit of a sticky wicket.
 
-    You basically have two choices
+    You basically have these choices
 
-    - Use the provided authentication workflow
-    - Use federated social login with a hosted UI
+    - Skip ahead to the next section (recommended)
+    - Use federated social login with a hosted UI (if you can create Google or Facebook applications with a developer account)
+    - Use Amplify's built-in authentication 
+    - Go it alone (not recommended). You use AWS Cognito's built in authentication flows to help you.
 
-    The provided authentication UI with sing-in/up is hard to theme to look ike it's part of the application. The federated hosted UI is pretty good, except I'm not going to assume you can create applications for the OAuth callbacks in Google Cloud or Facebook.
+    The default Amplify authentication UI with sign-in/up is hard to theme to look like it's part of the application. The federated hosted UI is pretty good, except I'm not going to assume you can create applications for the OAuth callbacks in Google Cloud or Facebook.
 
     Proceed with that in mind, or just skip to the next section. 
 
@@ -16,15 +18,19 @@ Amplify Authentication provides almost all we need out of the box.
 - Sign in
 - Forgot password
 
-See <https://docs.amplify.aws/lib/auth/getting-started/q/platform/js> for details. But it basically comes dow th the following.
+See <https://docs.amplify.aws/lib/auth/getting-started/q/platform/js> for details. But it basically comes down to the following.
 
-It's just the standard UI is all orange, which is the standard Amplify theme. Luckily for us, the awesome folks at AWS Amplify have a pretty solid set of reusable React components and a board Auth API. Let's dig in.
+It's just that the standard UI is all orange, the Amplify theme. 
 
 ## Add authentication to `App.tsx`
+
+You already added authentication to your Amplify application earlier. So now we can
 
 ```typescript
 import { withAuthenticator } from '@aws-amplify/ui-react'
 ```
+
+And wrap the application to require it.
 
 ```typescript
 export default withAuthenticator(App);
@@ -34,9 +40,9 @@ Try it.
 
 ![Ugly sign in](./assets/screenshots/ugly-signin.png)
 
-Ugly for so many reasons. But it doesn't no work. You can sign up and sign in!
+Ugly for so many reasons. You can at least sign up and sign in. Not bad
 
-We need to sign out. Let's try.
+But we need to sign out. Let's try.
 
 ```typescript
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
@@ -51,10 +57,9 @@ import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 
 ![Ugly sign out](./assets/screenshots/ugly-sign-out.png)
 
-Let's fix it by calling the `Auth` API from a React Material button. 
-```typescript
-import React, { MouseEvent } from 'react';
-```
+Kinda.
+
+Let's fix it by calling the `Auth` API from a React Material button instead. We'll left-align the button. First an event handler.
 
 ```typescript
 function onSignOut(event: MouseEvent<HTMLButtonElement>) {
@@ -67,24 +72,22 @@ function onSignOut(event: MouseEvent<HTMLButtonElement>) {
 }
 ```
 
-We'll need to left-align the button.
-
+Styling for React Material UI is done using `makeStyles`. It lets us define styles with type-safety and editor completion by name. Using them is easy.
 
 ```typescript
+import React, { MouseEvent } from 'react';
+```
+
+```typescript hl_lines="1 2 3 4 5 8 14"
 const useStyles = makeStyles((theme) => ({
-    content: {
-        // top, right, bottom, left
-        margin: theme.spacing(2, 2, 0, 2)
-    },
     title: {
         flexGrow: 1
     }
 }));
-```
 
-And tie everything together
+function App() {
+    const classes = useStyles();
 
-```typescript hl_lines="5 6"
     return (
         <>
             <AppBar color="inherit" position="static">
@@ -100,15 +103,23 @@ And tie everything together
 
 Nice.
 
-## Make a login screen for React Material
+## Make a login screen for React Material UI
 
 !!! note
-    There's a lot written about this. But none of it quite works for React Material, or works at with hte versions of Amplify and REact we're using here. See [Here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/), [here](https://blog.kylegalbraith.com/2020/03/31/customizing-the-aws-amplify-authentication-ui-with-your-own-react-components/), [here](<https://medium.com/@howitson/how-i-managed-to-customize-aws-amplify-login-screens-8d85d0967849>), [here](https://dev.to/dabit3/the-complete-guide-to-user-authentication-with-the-amplify-framework-2inh), and [here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/) for some of the closest we found. There are many more.
+    There's a lot written about this. But none of it quite works for React Material, or works at with the versions of Amplify and React we're using. See [here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/), [here](https://blog.kylegalbraith.com/2020/03/31/customizing-the-aws-amplify-authentication-ui-with-your-own-react-components/), [here](<https://medium.com/@howitson/how-i-managed-to-customize-aws-amplify-login-screens-8d85d0967849>), [here](https://dev.to/dabit3/the-complete-guide-to-user-authentication-with-the-amplify-framework-2inh), and [here](https://blog.logrocket.com/authentication-react-apps-aws-amplify-cognito/) for some of the closest we found. There are many more.
 
-## Use the hosted federated login
+## Or use the hosted social login
+
+Your best best is to use the hosted OAuth federated UI.
 
 You can follow the instructions <https://docs.amplify.aws/lib/auth/social/q/platform/js> to make this work. You'll need access to developer accounts in Facebook or Google to create applications to use in the OAuth integration.
 
 When you're done, it looks something like
 
 ![Federated Authentication UI](./assets/screenshots/hosted-signin-ui.png)
+
+## The upshot
+
+It's tricky to get the authentication just how we want it.
+
+It's a distraction. I vote we leave it for now.

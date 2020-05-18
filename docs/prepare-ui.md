@@ -1,12 +1,10 @@
-We're going to add code to one of the pages—vehicles—to add a vehicle and list them out. We just generate random values for fields for now. And it won't be hooked up to the back end. But this will let us see how to update state and display the complete list. 
+We're going to add code to one of the pages, vehicles, to add a vehicle and list them out. We just generate random values for fields for now. And it won't be hooked up to the back end. But this will let us see how to update state and display the complete list. 
 
 ## A little layout
 
 Lets solve the ugly indentation of the "Vehicles" header. Actually, let's solve the problem for all pages at the same time. This is easy: Just add a simple style to `App.tsx`. 
 
-Define a style before the function definition like this.
-
-!!! into "This goes in `App.tsx`."
+We already dipped our toe in the water in the authentication UI if you decided to do it. We're just going to add another style to `App.tsx`.
 
 ```typescript
 import { makeStyles } from '@material-ui/core';
@@ -21,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 The `theme` argument lets us use spacing from the theme itself. We could use hard-coded pixel sizes, but we'd have to update all those manually every time the theme changes. That would be not only annoying, but in addition your pull request would be rejected and no one on your team will want to go to lunch with you today.
 
-`makeStyles()` returns a function. We get the classNames from the result of calling this function. And we use it referencing the class name. Look at the `<div>` around the `<Switch>`.
+`makeStyles()` returns a function. We get the classes lookup from the result of calling this function. And we use it referencing the class name. Look at the `<div>` around the `<Switch>`.
 
 ```typescript hl_lines="2 16 23"
 function App() {
@@ -51,6 +49,8 @@ function App() {
   );
 }
 ```
+
+Try it.
 
 It's looking quite a bit better. We have every right to be chuffed.
 
@@ -88,7 +88,7 @@ export declare class Vehicle {
 }
 ```
 
-A bit of a mouthful, but it's going to be jolly useful. Specifically, we're going to use the `Vehicle` class intact.
+A bit of a mouthful, but it's going to be super useful. We can use the generated classes intact.
 
 ## Now add some state for the list of vehicles
 
@@ -150,7 +150,7 @@ function addVehicle() {
 ```
 
 !!! note
-    The `Vehicle` class contains metadata that Amplify runtime uses for persistence. This is out-of-bounds for us to update directly. However all persistent classes derived from `schema.graphql`—including our `Vehicle` class—include a constructor with just our fields except `id`, which is considered part of the metadata.
+    The `Vehicle` class contains metadata that Amplify runtime uses for persistence. This is out-of-bounds for us to update directly. However all persistent classes derived from `schema.graphql` — including our `Vehicle` class — include a constructor with just our fields except `id`, which is considered part of the metadata.
 
 Add a `<Button onClick{...}>` handler. This also needs to be inside the main function.
 
@@ -173,12 +173,12 @@ import { Typography, Button } from '@material-ui/core';
 ```
 
 ```typescript
-  return (
-      <>
-          <Button onClick={onClick}>Add vehicle</Button>
-          <Typography>{JSON.stringify(vehicles)}</Typography>
-      </>
-  );
+return (
+    <>
+        <Button onClick={onClick}>Add vehicle</Button>
+        <Typography>{JSON.stringify(vehicles)}</Typography>
+    </>
+);
 ```
 
 Try it out, `yarn start` as usual.

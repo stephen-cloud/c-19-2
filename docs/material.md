@@ -1,6 +1,4 @@
-## Get React Material UI
-
-```
+```shell
 yarn add @material-ui/core
 ```
 
@@ -16,7 +14,7 @@ function App() {
   return (
     <AppBar color="inherit" position="static">
       <Toolbar>
-        <Typography variant="h4" >Welcome to C-19 Autobody</Typography>
+        <Typography variant="h4">Welcome to C-19 Autobody</Typography>
       </Toolbar>
     </AppBar>
   );
@@ -60,8 +58,8 @@ ReactDOM.render(
 serviceWorker.unregister();
 ```
 
-We like dark theme.
-
 ## The upshot
+
+You added Material UI to your tiny starter React application and went for the dark theme. You made a simple application bar. 
 
 ![Dark theme](./assets/screenshots/basic-react-material-dark.png)

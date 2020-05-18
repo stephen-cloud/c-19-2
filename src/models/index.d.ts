@@ -4,22 +4,24 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-export declare class Vehicle {
-  readonly id: string;
-  readonly make: string;
-  readonly model: string;
-  readonly mileage?: number;
-  readonly owner?: Owner;
-  constructor(init: ModelInit<Vehicle>);
-  static copyOf(source: Vehicle, mutator: (draft: MutableModel<Vehicle>) => MutableModel<Vehicle> | void): Vehicle;
-}
-
 export declare class Owner {
   readonly id: string;
   readonly name: string;
   readonly vehicles?: Vehicle[];
   constructor(init: ModelInit<Owner>);
   static copyOf(source: Owner, mutator: (draft: MutableModel<Owner>) => MutableModel<Owner> | void): Owner;
+}
+
+export declare class Vehicle {
+  readonly id: string;
+  readonly ownerID?: string;
+  readonly make: string;
+  readonly model: string;
+  readonly mileage?: number;
+  readonly owner?: Owner;
+  readonly ownerVehiclesId?: string;
+  constructor(init: ModelInit<Vehicle>);
+  static copyOf(source: Vehicle, mutator: (draft: MutableModel<Vehicle>) => MutableModel<Vehicle> | void): Vehicle;
 }
 
 export declare class Part {

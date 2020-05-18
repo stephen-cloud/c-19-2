@@ -1,7 +1,8 @@
+import React from 'react';
 import AwesomeTable from './AwesomeTable';
 import { Column, Query } from 'material-table';
 import { Service } from './models';
-import { ModelPredicate } from '@aws-amplify/datastore';
+import { ModelPredicate, MutableModel } from '@aws-amplify/datastore';
 
 const columns: Column<Service>[] = [
     { title: 'Name', field: 'name' },
@@ -21,20 +22,18 @@ function instanceFor(newData: any): Service {
     });
 }
 
-function updater(original: Service, newData: any) {
-    return Service.copyOf(original, updated => {
-        updated.name = newData.name
-    });
+function mutator(draft: MutableModel<Service>, newData: any) {
+    draft.name = newData.name || '';
 }
 
 const Services = () => {
-    return AwesomeTable<Service>({
-        model: Service,
-        columns,
-        searchCriteria,
-        instanceFor,
-        updater
-    })
+    return <AwesomeTable
+        model={Service}
+        columns={columns}
+        searchCriteria={searchCriteria}
+        instanceFor={instanceFor}
+        mutator={mutator}
+    />
 }
 
 export default Services;

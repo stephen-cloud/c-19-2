@@ -4,11 +4,11 @@ import { schema } from './schema';
 
 
 
-const { Vehicle, Owner, Part, Service } = initSchema(schema);
+const { Owner, Vehicle, Part, Service } = initSchema(schema);
 
 export {
-  Vehicle,
   Owner,
+  Vehicle,
   Part,
   Service
 };

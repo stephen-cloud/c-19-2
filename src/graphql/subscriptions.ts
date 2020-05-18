@@ -2,78 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateVehicle = /* GraphQL */ `
-  subscription OnCreateVehicle {
-    onCreateVehicle {
-      id
-      make
-      model
-      mileage
-      owner {
-        id
-        name
-        vehicles {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateVehicle = /* GraphQL */ `
-  subscription OnUpdateVehicle {
-    onUpdateVehicle {
-      id
-      make
-      model
-      mileage
-      owner {
-        id
-        name
-        vehicles {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteVehicle = /* GraphQL */ `
-  subscription OnDeleteVehicle {
-    onDeleteVehicle {
-      id
-      make
-      model
-      mileage
-      owner {
-        id
-        name
-        vehicles {
-          nextToken
-          startedAt
-        }
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
 export const onCreateOwner = /* GraphQL */ `
   subscription OnCreateOwner {
     onCreateOwner {
@@ -82,19 +10,13 @@ export const onCreateOwner = /* GraphQL */ `
       vehicles {
         items {
           id
+          ownerID
           make
           model
           mileage
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -106,19 +28,13 @@ export const onUpdateOwner = /* GraphQL */ `
       vehicles {
         items {
           id
+          ownerID
           make
           model
           mileage
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -130,19 +46,67 @@ export const onDeleteOwner = /* GraphQL */ `
       vehicles {
         items {
           id
+          ownerID
           make
           model
           mileage
-          _version
-          _deleted
-          _lastChangedAt
         }
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
+    }
+  }
+`;
+export const onCreateVehicle = /* GraphQL */ `
+  subscription OnCreateVehicle {
+    onCreateVehicle {
+      id
+      ownerID
+      make
+      model
+      mileage
+      owner {
+        id
+        name
+        vehicles {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateVehicle = /* GraphQL */ `
+  subscription OnUpdateVehicle {
+    onUpdateVehicle {
+      id
+      ownerID
+      make
+      model
+      mileage
+      owner {
+        id
+        name
+        vehicles {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteVehicle = /* GraphQL */ `
+  subscription OnDeleteVehicle {
+    onDeleteVehicle {
+      id
+      ownerID
+      make
+      model
+      mileage
+      owner {
+        id
+        name
+        vehicles {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -153,9 +117,6 @@ export const onCreatePart = /* GraphQL */ `
       description
       price
       inventory
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -166,9 +127,6 @@ export const onUpdatePart = /* GraphQL */ `
       description
       price
       inventory
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -179,9 +137,6 @@ export const onDeletePart = /* GraphQL */ `
       description
       price
       inventory
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -190,9 +145,6 @@ export const onCreateService = /* GraphQL */ `
     onCreateService {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -201,9 +153,6 @@ export const onUpdateService = /* GraphQL */ `
     onUpdateService {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -212,9 +161,6 @@ export const onDeleteService = /* GraphQL */ `
     onDeleteService {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

@@ -33,7 +33,7 @@ So now our Material Table declaration looks like
 />
 ```
 
-!!! todo
+!!! To do
     More polish needed here
 
     - Fix screen flash

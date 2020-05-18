@@ -1,12 +1,14 @@
-!!! todo "Where should we put this? What are the responses?"
-    
+Adding an Amplify API is easy. You may already have done it in the Amplify "Getting Started". 
+
 ```shell
 amplify update api
 amplify push
 ```
 
 !!! note
-    We're going to keep the state as-is for now. You'll see that the way we use it is inefficient because we're fetching all vehicles every time we make a change. The basic table provided by React Material does not provide pagination with lazy loading. We'll get to a solution for this in a bit. But it's a bit complicated and might throw us off the scent if we do that now.
+    We're going to keep the state as-is for now. You'll discover that the way we use it is inefficient because we're fetching all vehicles every time we make a change. The basic table provided by React Material does not provide pagination with lazy loading. 
+    
+    We'll get to a solution for this in a bit. But it's a bit complicated and might throw us off the scent if we do that now.
 
     If you're curious, we're going to show you how to use Material Table, <https://material-table.com> for lots of table goodness.
 
@@ -41,13 +43,11 @@ import amplify_configuration from './aws-exports';
 Amplify.configure(amplify_configuration);
 ```
 
-## Use the DataStore API in `Vehicles.tsx`
+## Use the DataStore API
 
 The `DataStore` API is an alternative to using the raw GraphQL API, which can get a bit fiddly to get right at first.
 
 !!! info "This goes in `Vehicles.tsx`."
-
-## Using `DataStore`
 
 Import it.
 
@@ -74,7 +74,7 @@ function addVehicle() {
 That's also true for `DataStore.query()`, the way we're going to fetch data now.
 
 !!! note
-    The default query is all objects. We can supply predicates and pagination details in the query. We'll get to that when we use <https://material-table.com/#/>, which lazy loads as it paginates.
+    The default query is all objects. We can supply predicates and pagination details in the query. We'll get to that when we use <https://material-table.com/#/docs/features/remote-data>, which lazy loads as it paginates.
 
 We use the `setVehicles(...)` React hook as before. But this time with the results of the DataStore query. Here's that function.
 
@@ -108,7 +108,7 @@ import { DataStore, SubscriptionMessage } from '@aws-amplify/datastore';
 
 ## Observe changes and subscribe to them
 
-Now that we have a functions `fetchAll()` and `subscriber()`, let's put them together in a `withEffect()`. Read that as "with side-effect". You can find out more here: <https://reactjs.org/docs/hooks-effect.html>. 
+Now that we have a functions `fetchAll()` and `subscriber()`, let's put them together in a `useEffect()`. Read that as "with side-effect". You can find out more here: <https://reactjs.org/docs/hooks-effect.html>. 
 
 ```typescript
 import React, { useEffect } from 'react';
@@ -132,7 +132,7 @@ useEffect(() => {
 }, []);
 ```
 
-Now whenever AppSync sends us an update we read the data from DynamoDB and display it.
+Pur application listens on a websocket for messages from AppSync. AppSync sends an update message when we — or another application changing the same data — creates, updates, or deletes a row. We read new data from DynamoDB and display it when something interesting happens.
 
 So now we have
 
@@ -154,18 +154,21 @@ Let's try it anyway. (`yarn start` as usual.)
 
 Open up another browser <http://localhost:3000> and watch what happens when you add a vehicle.
 
-You just wrote Google docs for cars. 
+You just wrote Google Docs for cars. 
 
 ## The upshot
 
-We configured Amplify. We created an Amplify DataSource observer and subscribed to events from it. We learned just a little about `useEffect()` and glued that all together. We were a bit astonished at what that allowed us to do if we're being honest.
+We configured Amplify. We created an Amplify DataSource observer and subscribed to events from it. We learned just enough about `useEffect()` to be the life and soul of your next party. Then we glued together all the things. 
+
+Google Docs for cars?
+
+We were a bit astonished we could do that if we're being completely honest.
 
 The final `index.tsx` is
 
 ```typescript
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { createMuiTheme, ThemeProvider, CssBaseline } from '@material-ui/core';

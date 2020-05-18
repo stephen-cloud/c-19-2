@@ -25,18 +25,28 @@ site_url: https://stephen-cloud.github.io/c-19-autobody/
 # Copyright
 copyright: Copyright &copy; 2020 Stephen Harrison
 
+# GitHub
+repo_name: stephen-cloud/c-19-autobody
+repo_url: https://github.com/stephen-cloud/c-19-autobody.git
+edit_uri: ""
+
 # Configuration
 theme:
     name: material
     logo: assets/ic_build_white_48dp.png
     language: en
-    features:
-        - tabs
+    # features:
+        # - tabs
 
 # Extras
 
 extra:
   disqus: c19-autobody
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/stephen-cloud
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/stephenharrison
 
 # Plugins
 plugins:
@@ -65,7 +75,7 @@ nav:
     - Connect the UI:
           - Prepare the UI: prepare-ui.md
           - Add a table: add-table-view.md
-          - Connect to the back-end: connect-to-backend.md
+          - Wire up the back-end: connect-to-backend.md
     - Make the table great:
           - Material Table: awesome-table.md
           - Make table reusable: reusable-table.md
@@ -79,3 +89,4 @@ nav:
           - Acknowledgements: thanks.md
           - Release notes: release-notes.md
           - License: license.md
+          - About me: resume.md

@@ -1,7 +1,7 @@
 !!! info
-    If you get turned around with the sequence of updates we're going to make with files, or if you'd rather the TL;DR, click "The upshot" on the right to see what's what.
+    If you get turned around with the sequence of updates we're going to make with files, or if you'd rather the TL;DR, find "The upshot" at the end of each page. Let us know in the comments if we missed one.
 
-Well, first we need to be able to get to pages for all the things you'll be dealing with in an autobody shop: _vehicles_, _owners_, _services_, _parts_, and _work orders_.
+Well, first we need to make pages for all the things you'll be dealing with in an autobody shop: Vehicles, Owners, Services, Parts, and Work Orders. 
 
 Let's set up a row of buttons for that. They won't be plugged in yet. We'll get to that shortly.
 
@@ -101,9 +101,7 @@ yarn add react-router-dom @types/react-router-dom
 
 Now wrap the `App` component in a `<BrowserRouter>` ... `</BrowserRouter>`. The easiest place to do this is in `index.tsx`.
 
-!!! note "Make these changes in `index.tsx`."
-
-Add the import
+Add the import to `index.tsx`.
 
 ```typescript
 import { BrowserRouter } from "react-router-dom";
@@ -129,13 +127,15 @@ ReactDOM.render(
 
 It's actually pretty easy now we have the stub components and the `<BrowserRouter>` wrapper.
 
-!!! info "Make these changes in `App.tsx`."
-
-Add `<Link>`s and URL paths to the `<Button>`s in the `<AppBar>`.
+Add `<Link>`s and URL paths to the `<Button>`s in the `<AppBar>` in `App.tsx`.
 
 ```typescript
 import { Link } from 'react-router-dom';
 ```
+
+!!! note
+    There's an export `<Link>` from `@material-ui/core`. We don't want that one.
+    
 
 ```typescript hl_lines="8 9 10 11 12 13 14 15"
 function App() {
@@ -192,7 +192,7 @@ import Vehicles from './Vehicles';
 Try it with `yarn start` as usual.
 
 !!! warning
-    We know. It looks dreadful right now. We're going to clean it up in a bit.
+    We know. The application looks dreadful right now. We're going to clean it up a bit in a bit.
 
 ## The upshot
 

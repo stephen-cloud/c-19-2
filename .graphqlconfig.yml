@@ -1,6 +1,6 @@
 projects:
   c192:
-    schemaPath: amplify/backend/api/c192/build/schema.graphql
+    schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.ts
     excludes:

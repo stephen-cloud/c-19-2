@@ -1,21 +1,27 @@
 import React, { useEffect, createRef } from 'react';
 import { Grid } from '@material-ui/core';
-import { DataStore, SubscriptionMessage, ModelPredicate, PersistentModel, PersistentModelConstructor } from '@aws-amplify/datastore';
+import { DataStore, SubscriptionMessage, ModelPredicate, MutableModel, PersistentModel, PersistentModelConstructor } from '@aws-amplify/datastore';
 import MaterialTable, { Column, Query, QueryResult, MaterialTableProps, Options, Action } from 'material-table'
-import { DirectionsCar } from '@material-ui/icons'
 
 export interface AwesomeTableProps<T extends PersistentModel> {
+    title?: string
     model: PersistentModelConstructor<T>,
     columns: Column<T>[];
     searchCriteria: (query: Query<T>, condition: ModelPredicate<T>) => ModelPredicate<T>
     instanceFor: (newData: any) => T;
-    updater: (original: T, newData: any) => T;
+    mutator: (draft: MutableModel<T>, newData: any) => void;
     actions?: Action<T>[];
-    overrides?: OverrideProps;
+    overrides?: OverrideProps<T>;
+    onSelectionChange?: (rows: T | T[]) => void;
+    selectionProps?: (data: any) => any
 }
 
-export interface OverrideProps {
+export interface OverrideProps<T extends PersistentModel> {
+    title?: string;
     options?: Options;
+    selectionProps?: any | ((data: any) => any);
+    onRowSelected?: (row: T) => void;
+    onSelectionChange?: (rows: any | any[]) => void;
 }
 
 function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
@@ -66,8 +72,14 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
                     (predicate) => props.searchCriteria(query, predicate),
                     thisPage)
                 .then(rows => {
+                    console.log('raw rows', rows);
+
+                    const mapped = rowMapper(rows);
+
+                    console.log('mapped rows', mapped);
+
                     resolve({
-                        data: rowMapper(rows),
+                        data: mapped,
                         page: query.page,
                         totalCount: 1000000
                     });
@@ -110,7 +122,10 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
                 DataStore
                     .query(props.model, oldData.id)
                     .then(original => {
-                        return DataStore.save(props.updater(original, newData));
+                        const copyOf = props.model.copyOf(original, draft => props.mutator(draft, newData));
+                        console.log('copyOf', copyOf);
+
+                        return DataStore.save(copyOf)
                     })
                     .then(result => {
                         clearTimeout(timeout)
@@ -143,13 +158,18 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
         padding: "dense",
         searchFieldAlignment: "left",
         toolbarButtonAlignment: "left",
-        selection: true
+        selection: false,
+        // showSelectAllCheckbox: false,
+        // showTextRowsSelected: false,
     }
-    const options: Options = { ...defaultOptions, ...props.overrides };
 
-    console.log('defaultOptions', defaultOptions);
-    console.log('props.overrides', props.overrides);
-    console.log('options', options);
+    // There HAS to be a better way to do this {...defaultOptions, ...props.overrides} didn't work and I don't know why
+    //
+    const options: Options = {
+        ...defaultOptions,
+        selection: props.overrides?.options?.selection || false,
+        selectionProps: props.overrides?.options?.selectionProps,
+    };
 
     return (
         <Grid container spacing={2}>
@@ -160,8 +180,9 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
                     columns={props.columns}
                     editable={editable}
                     localization={localization}
-                    options={options}
+                    onSelectionChange={props.onSelectionChange}
                     actions={props.actions}
+                    options={options}
                 />
             </Grid>
         </Grid>

@@ -15,22 +15,24 @@ You can brush up your TypeScript here.
 
 You can learn about React Material and Material Table. 
 
-We introduce AWS Amplify.
+You can get started with AWS Amplify.
 
-Why C-19 Autobody? Well, I was laid off from my online retail company as a result of COVID-19. Sales were down. A lot, and then some. So between talking to recruiters and having interviews, I learned lots of things I didn't know and put them together. And C-19 because I'm helping a buddy of mine with tech in his autobody shop. And I just saw an article on the C-19 antibody.
+Why C-19 Autobody? Well, I was laid off from my online retail company as a result of COVID-19. Sales were down. A lot, and then some. So between talking to recruiters and having interviews, I learned lots of things I didn't know and put them together. 
+
+I did this a way that was interesting to me because I could not find documentation about some of the important integrations. And "C-19 Autobody" because I'm helping a buddy of mine with tech in his autobody shop. And I just saw an article on the C-19 antibody.
 
 Here are the features and technologies we're using to implement in this demo.
 
 | Feature | Technology |
 | --- | --- |
-| A type safe(r) programming language | TypeScript |
-| Cloud-native and serverless | AWS Amplify |
-| A User Interface | React Material |
-| Sign-up, sign-in, forgot password | AWS Amplify Authentication |
-| Google, Facebook, and other social providers | Federated Authentication |
-| A back-end API | GraphQL schema definition + AWS Amplify GraphQL API |
-| A database | AWS Amplify API + AWS DynamoDB |
-| Subscribe to data changes; handle off-line edits | AWS AppSync | 
+| A type safe(r) programming language | [TypeScript](https://www.typescriptlang.org/) |
+| Cloud-native and serverless | [AWS Amplify](https://aws.amazon.com/amplify/) |
+| A User Interface | [React Material-UI](https://material-ui.com/) |
+| Sign-up, sign-in, forgot password | [AWS Amplify Authentication](https://docs.amplify.aws/lib/auth/getting-started/q/platform/js) |
+| A feature-rich React Material table | [Material Table](https://material-table.com/#/) |
+| Google, Facebook, and other social providers | [Federated Authentication](https://aws-amplify.github.io/docs/js/federated-identity) |
+| A back-end data API and database | [GraphQL](https://graphql.org/learn/) schema definition + [AWS Amplify GraphQL API](https://docs.amplify.aws/cli/graphql-transformer/overview) + [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) |
+| Subscribe to data changes; handle off-line edits | [AWS AppSync](https://aws.amazon.com/appsync/) | 
 
 ## Who is this for?
 
@@ -40,7 +42,7 @@ If you know React Material, Material Table, AWS Amplify, or any of the technolog
 
 Lots! But none I could find that shows the level of detail we go into here with the specific technologies we're going to use.
 
-But by far the best Amplify tutorial for a different stack is the astonishingly good <https://github.com/aws-samples/aws-serverless-airline-booking>. That tutorial integrates lots of AWS technologies explicitly, which is great to know how to do in any framework, especially in AWS Amplify. I started this tutorial before I found this (thanks Tim!) and almost gave up.
+But by far the best Amplify tutorial for a different stack is the astonishingly good <https://github.com/aws-samples/aws-serverless-airline-booking>. That tutorial integrates lots of AWS technologies explicitly, which is great to know how to do in any framework, especially in AWS Amplify. I started this tutorial before I found this (thanks Tim!) and almost gave up. I'm glad I didn't because this was a lot more fun than looking for a job.
 
 If the current tutorial's not for you just head over to that other one and we won't even be mad. Enjoy whichever one you find more helpful. 
 
@@ -50,7 +52,9 @@ After you follow all the steps, you'll have a React Material web application bac
 
 ![C-19 Autobody](./assets/screenshots/vehicle-finished-table.png)
 
-The application is only a demo: It doesn't actually fix cars.
+!!! note
+
+    The application is only a demo: It doesn't actually fix cars.
 
 
 

@@ -12,7 +12,7 @@ import { Vehicle } from './models';
 
 The definition of the `Column`s is specific to a type.
 
-```typescript
+```typescript hl_lines="1"
 const columns: Column<Vehicle>[] = [
     { title: 'Make', field: 'make' },
     { title: 'Model', field: 'model' },
@@ -54,7 +54,7 @@ function Vehicles() {
     }, [tableRef]);
 ```
 
-which is just type parameters. Looking plausible.
+which is just type parameters. Looking like there's a plausible refactoring in there. Let's press on.
 
 The `rowMapper()` is also just parametrized by type
 
@@ -130,7 +130,7 @@ And similarly on `onRowDelete` and `onRowUpdate`.
 
 ## The best approach
 
-We think we'll create a new `Component` that has all the code, and pull out the highlighted code above incrementally until there are no references to `Vehicle`.
+We think we'll create a new React `Component` that has all the common table code, and pull out the highlighted code above incrementally until there are no more references to `Vehicle` left in the abstraction.
 
 Let's do it.
 
@@ -149,7 +149,7 @@ const AwesomeTable = (props: AwesomeTableProps) => {
     useEffect(() => {
 ```
 
-Replace `Vehicles.tsx` with
+Replace `Vehicles.tsx` with the trivial.
 
 ```typescript
 import AwesomeTable from './AwesomeTable';
@@ -191,9 +191,8 @@ const columns: Column<Vehicle>[] = [
 
 const Vehicles = () => {
     return AwesomeTable({
-        model: Vehicle,
         columns
-    })
+    });
 }
 
 export default Vehicles;
@@ -209,7 +208,7 @@ We need a generic type for the properties and the same for `AwesomeTable`. You c
 import { DataStore, SubscriptionMessage, ModelPredicate, PersistentModel, PersistentModelConstructor } from '@aws-amplify/datastore';
 ```
 
-`PersistentModel` is the base for all generated entity types. And the properties we need to pass in are
+`PersistentModel` is the base for all generated entity types. And the final properties we need to pass to `AwesomeTable` are
 
 ```typescript
 export interface AwesomeTableProps<T extends PersistentModel> {
@@ -223,7 +222,7 @@ export interface AwesomeTableProps<T extends PersistentModel> {
 
 Let's unpack that.
 
-`<T extends PersistentModel>` looks good. But we can't get the type of `T` at runtime, which we need to pass to `DataStore` functions so it knows the right model and DynamoDB table to use. That's why we have to pass the type as `model`. But we actually want the define the class by its constructor. `PersistentModelConstructor<T>` is the constructor definition we need.
+`<T extends PersistentModel>` looks good. But we can't get the type of `T` at runtime, which we need to pass to `DataStore` functions so it knows the right model and DynamoDB table to use. That's why we have to pass the type as `model`. But we actually want to define the class by its constructor. `PersistentModelConstructor<T>` is the constructor we need.
 
 !!! note
     This is all so we can replace `DataStore.query(Vehicle, ...)` with `DataStore.query(props.model, ...)`. It works, although not the first time let me tell you.
@@ -396,11 +395,11 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
 export default AwesomeTable;
 ```
 
-This was in all honestly a pretty easy change one we could figure out the right type incantations. 
+This was in all honestly a pretty easy change once we could figure out the right type incantations. 
 
 But is it any good?
 
-Yes.
+Yes. Hold my keyboard.
 
 Here's all we have to write now for `Vehicle`. It's just setting up and passing in configuration and functions that are specific to a `Vehicle`.
 
@@ -457,12 +456,14 @@ export default Vehicles;
 
 ## The upshot
 
-We made a version of the Material Table using generics. We were able to extract all the boilerplate to a new file, which makes the new `Vehicles.tsx` about as concise as we know.
+We made a version of the Material Table using generics. We were able to extract all the boilerplate to a new file, which makes the new `Vehicles.tsx` about as concise as we know how.
 
 We're left with a table that...
 
 * Is backed by remote data fetched from DynamoDB using the `DataStore` GraphQL abstraction.
-* Has some handy features turned on by default: Create, Read, Update, Delete (CRUD); sorting; searching; filtering.
-* Has pagination, which we changed to the `stepped` variant.
-* Has data export and download.
+* Fetches rows by the page rather than all the rows every time.
+* Has Create, Read, Update, Delete (CRUD) functionality right there in the table itself. 
+* Has sorting, searching, and filtering.
+* Has a pagination UI, which we changed to the `stepped` variant.
+* Can export and download data.
 * Allows column dragging (did you see that one?)

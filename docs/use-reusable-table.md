@@ -75,7 +75,7 @@ Don't forget to change the menu components in `App.tsx`.
       </div>
 ```
 
-Here are the changes we make for each new model.
+Here are the changes we made reusing `Vehicles.tsx` to make `Owners.tsx`. As you can see, there's not much that's not red or green. A good sign that our abstraction's working  well.
 
 ```diff
  import AwesomeTable from './AwesomeTable';
@@ -301,6 +301,6 @@ Try it. `AwesomeTable` is awesome.
 
 We were able to leverage our reusable `AwesomeTable` to add CRUD functionality to the components `Owners.tsx`, `Parts.tsx`, and `Services.tsx`,
 
-It was pretty easy if we're being honest so the work we did in the table abstraction really paid off. That code is bit involved because it's dealing with the `DataStore` abstraction for GraphQL: The component code is straightforward. A bit wordy. But workable.
+It was pretty easy so the work we did in the table abstraction really paid off. That code is bit involved because it's dealing with the `DataStore` abstraction for GraphQL: The component code is straightforward. A bit wordy. But workable.
 
 Next up, we're going to add code to handle relations between models.

@@ -1,7 +1,8 @@
+import React from 'react';
 import AwesomeTable from './AwesomeTable';
 import { Column, Query } from 'material-table';
 import { Part } from './models';
-import { ModelPredicate } from '@aws-amplify/datastore';
+import { ModelPredicate, MutableModel } from '@aws-amplify/datastore';
 
 const columns: Column<Part>[] = [
     { title: 'Description', field: 'description' },
@@ -32,24 +33,20 @@ function instanceFor(newData: any): Part {
     return result;
 }
 
-function updater(original: Part, newData: any) {
-    return Part.copyOf(original,
-        updated => {
-            updated.description = newData.description;
-            updated.price = parseFloat(newData.search);
-            updated.inventory = parseInt(newData.search, 10);
-        }
-    );
+function mutator(draft: MutableModel<Part>, newData: any) {
+    draft.description = newData.description || '';
+    draft.inventory = newData.inventory;
+    draft.price = newData.price;
 }
 
 const Parts = () => {
-    return AwesomeTable<Part>({
-        model: Part,
-        columns,
-        searchCriteria,
-        instanceFor,
-        updater
-    })
+    return <AwesomeTable
+        model={Part}
+        columns={columns}
+        searchCriteria={searchCriteria}
+        instanceFor={instanceFor}
+        mutator={mutator}
+    />
 }
 
 export default Parts;
