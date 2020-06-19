@@ -17,9 +17,20 @@ export const createOwner = /* GraphQL */ `
           make
           model
           mileage
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -38,9 +49,20 @@ export const updateOwner = /* GraphQL */ `
           make
           model
           mileage
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -59,9 +81,20 @@ export const deleteOwner = /* GraphQL */ `
           make
           model
           mileage
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -76,13 +109,11 @@ export const createVehicle = /* GraphQL */ `
       make
       model
       mileage
-      owner {
-        id
-        name
-        vehicles {
-          nextToken
-        }
-      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -97,13 +128,11 @@ export const updateVehicle = /* GraphQL */ `
       make
       model
       mileage
-      owner {
-        id
-        name
-        vehicles {
-          nextToken
-        }
-      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -118,13 +147,11 @@ export const deleteVehicle = /* GraphQL */ `
       make
       model
       mileage
-      owner {
-        id
-        name
-        vehicles {
-          nextToken
-        }
-      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -138,6 +165,11 @@ export const createPart = /* GraphQL */ `
       description
       price
       inventory
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -151,6 +183,11 @@ export const updatePart = /* GraphQL */ `
       description
       price
       inventory
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -164,6 +201,11 @@ export const deletePart = /* GraphQL */ `
       description
       price
       inventory
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -175,6 +217,11 @@ export const createService = /* GraphQL */ `
     createService(input: $input, condition: $condition) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -186,6 +233,11 @@ export const updateService = /* GraphQL */ `
     updateService(input: $input, condition: $condition) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -197,6 +249,11 @@ export const deleteService = /* GraphQL */ `
     deleteService(input: $input, condition: $condition) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;

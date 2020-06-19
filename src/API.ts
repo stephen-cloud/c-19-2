@@ -5,6 +5,7 @@
 export type CreateOwnerInput = {
   id?: string | null,
   name: string,
+  _version?: number | null,
 };
 
 export type ModelOwnerConditionInput = {
@@ -57,10 +58,12 @@ export type ModelSizeInput = {
 export type UpdateOwnerInput = {
   id: string,
   name?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteOwnerInput = {
   id?: string | null,
+  _version?: number | null,
 };
 
 export type CreateVehicleInput = {
@@ -69,8 +72,7 @@ export type CreateVehicleInput = {
   make: string,
   model: string,
   mileage?: number | null,
-  ownerVehiclesId?: string | null,
-  vehicleOwnerId?: string | null,
+  _version?: number | null,
 };
 
 export type ModelVehicleConditionInput = {
@@ -117,12 +119,12 @@ export type UpdateVehicleInput = {
   make?: string | null,
   model?: string | null,
   mileage?: number | null,
-  ownerVehiclesId?: string | null,
-  vehicleOwnerId?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteVehicleInput = {
   id?: string | null,
+  _version?: number | null,
 };
 
 export type CreatePartInput = {
@@ -130,6 +132,7 @@ export type CreatePartInput = {
   description: string,
   price: number,
   inventory?: number | null,
+  _version?: number | null,
 };
 
 export type ModelPartConditionInput = {
@@ -158,15 +161,18 @@ export type UpdatePartInput = {
   description?: string | null,
   price?: number | null,
   inventory?: number | null,
+  _version?: number | null,
 };
 
 export type DeletePartInput = {
   id?: string | null,
+  _version?: number | null,
 };
 
 export type CreateServiceInput = {
   id?: string | null,
   name: string,
+  _version?: number | null,
 };
 
 export type ModelServiceConditionInput = {
@@ -179,10 +185,12 @@ export type ModelServiceConditionInput = {
 export type UpdateServiceInput = {
   id: string,
   name?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteServiceInput = {
   id?: string | null,
+  _version?: number | null,
 };
 
 export type ModelOwnerFilterInput = {
@@ -241,9 +249,20 @@ export type CreateOwnerMutation = {
         make: string,
         model: string,
         mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
       } | null > | null,
       nextToken: string | null,
+      startedAt: number | null,
     } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -266,9 +285,20 @@ export type UpdateOwnerMutation = {
         make: string,
         model: string,
         mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
       } | null > | null,
       nextToken: string | null,
+      startedAt: number | null,
     } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -291,9 +321,20 @@ export type DeleteOwnerMutation = {
         make: string,
         model: string,
         mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
       } | null > | null,
       nextToken: string | null,
+      startedAt: number | null,
     } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -310,15 +351,11 @@ export type CreateVehicleMutation = {
     make: string,
     model: string,
     mileage: number | null,
-    owner:  {
-      __typename: "Owner",
-      id: string,
-      name: string,
-      vehicles:  {
-        __typename: "ModelVehicleConnection",
-        nextToken: string | null,
-      } | null,
-    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -335,15 +372,11 @@ export type UpdateVehicleMutation = {
     make: string,
     model: string,
     mileage: number | null,
-    owner:  {
-      __typename: "Owner",
-      id: string,
-      name: string,
-      vehicles:  {
-        __typename: "ModelVehicleConnection",
-        nextToken: string | null,
-      } | null,
-    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -360,15 +393,11 @@ export type DeleteVehicleMutation = {
     make: string,
     model: string,
     mileage: number | null,
-    owner:  {
-      __typename: "Owner",
-      id: string,
-      name: string,
-      vehicles:  {
-        __typename: "ModelVehicleConnection",
-        nextToken: string | null,
-      } | null,
-    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -384,6 +413,11 @@ export type CreatePartMutation = {
     description: string,
     price: number,
     inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -399,6 +433,11 @@ export type UpdatePartMutation = {
     description: string,
     price: number,
     inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -414,6 +453,11 @@ export type DeletePartMutation = {
     description: string,
     price: number,
     inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -427,6 +471,11 @@ export type CreateServiceMutation = {
     __typename: "Service",
     id: string,
     name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -440,6 +489,11 @@ export type UpdateServiceMutation = {
     __typename: "Service",
     id: string,
     name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -453,6 +507,41 @@ export type DeleteServiceMutation = {
     __typename: "Service",
     id: string,
     name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type SyncOwnersQueryVariables = {
+  filter?: ModelOwnerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncOwnersQuery = {
+  syncOwners:  {
+    __typename: "ModelOwnerConnection",
+    items:  Array< {
+      __typename: "Owner",
+      id: string,
+      name: string,
+      vehicles:  {
+        __typename: "ModelVehicleConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
   } | null,
 };
 
@@ -474,9 +563,20 @@ export type GetOwnerQuery = {
         make: string,
         model: string,
         mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
       } | null > | null,
       nextToken: string | null,
+      startedAt: number | null,
     } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -496,9 +596,44 @@ export type ListOwnersQuery = {
       vehicles:  {
         __typename: "ModelVehicleConnection",
         nextToken: string | null,
+        startedAt: number | null,
       } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncVehiclesQueryVariables = {
+  filter?: ModelVehicleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncVehiclesQuery = {
+  syncVehicles:  {
+    __typename: "ModelVehicleConnection",
+    items:  Array< {
+      __typename: "Vehicle",
+      id: string,
+      ownerID: string | null,
+      make: string,
+      model: string,
+      mileage: number | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
   } | null,
 };
 
@@ -514,15 +649,11 @@ export type GetVehicleQuery = {
     make: string,
     model: string,
     mileage: number | null,
-    owner:  {
-      __typename: "Owner",
-      id: string,
-      name: string,
-      vehicles:  {
-        __typename: "ModelVehicleConnection",
-        nextToken: string | null,
-      } | null,
-    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -542,13 +673,41 @@ export type ListVehiclesQuery = {
       make: string,
       model: string,
       mileage: number | null,
-      owner:  {
-        __typename: "Owner",
-        id: string,
-        name: string,
-      } | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncPartsQueryVariables = {
+  filter?: ModelPartFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncPartsQuery = {
+  syncParts:  {
+    __typename: "ModelPartConnection",
+    items:  Array< {
+      __typename: "Part",
+      id: string,
+      description: string,
+      price: number,
+      inventory: number | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
   } | null,
 };
 
@@ -563,6 +722,11 @@ export type GetPartQuery = {
     description: string,
     price: number,
     inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -581,8 +745,39 @@ export type ListPartsQuery = {
       description: string,
       price: number,
       inventory: number | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken: string | null,
+    startedAt: number | null,
+  } | null,
+};
+
+export type SyncServicesQueryVariables = {
+  filter?: ModelServiceFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncServicesQuery = {
+  syncServices:  {
+    __typename: "ModelServiceConnection",
+    items:  Array< {
+      __typename: "Service",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken: string | null,
+    startedAt: number | null,
   } | null,
 };
 
@@ -595,6 +790,11 @@ export type GetServiceQuery = {
     __typename: "Service",
     id: string,
     name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -611,8 +811,14 @@ export type ListServicesQuery = {
       __typename: "Service",
       id: string,
       name: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken: string | null,
+    startedAt: number | null,
   } | null,
 };
 
@@ -630,9 +836,20 @@ export type OnCreateOwnerSubscription = {
         make: string,
         model: string,
         mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
       } | null > | null,
       nextToken: string | null,
+      startedAt: number | null,
     } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -650,9 +867,20 @@ export type OnUpdateOwnerSubscription = {
         make: string,
         model: string,
         mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
       } | null > | null,
       nextToken: string | null,
+      startedAt: number | null,
     } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -670,9 +898,20 @@ export type OnDeleteOwnerSubscription = {
         make: string,
         model: string,
         mileage: number | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
       } | null > | null,
       nextToken: string | null,
+      startedAt: number | null,
     } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -684,15 +923,11 @@ export type OnCreateVehicleSubscription = {
     make: string,
     model: string,
     mileage: number | null,
-    owner:  {
-      __typename: "Owner",
-      id: string,
-      name: string,
-      vehicles:  {
-        __typename: "ModelVehicleConnection",
-        nextToken: string | null,
-      } | null,
-    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -704,15 +939,11 @@ export type OnUpdateVehicleSubscription = {
     make: string,
     model: string,
     mileage: number | null,
-    owner:  {
-      __typename: "Owner",
-      id: string,
-      name: string,
-      vehicles:  {
-        __typename: "ModelVehicleConnection",
-        nextToken: string | null,
-      } | null,
-    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -724,15 +955,11 @@ export type OnDeleteVehicleSubscription = {
     make: string,
     model: string,
     mileage: number | null,
-    owner:  {
-      __typename: "Owner",
-      id: string,
-      name: string,
-      vehicles:  {
-        __typename: "ModelVehicleConnection",
-        nextToken: string | null,
-      } | null,
-    } | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -743,6 +970,11 @@ export type OnCreatePartSubscription = {
     description: string,
     price: number,
     inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -753,6 +985,11 @@ export type OnUpdatePartSubscription = {
     description: string,
     price: number,
     inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -763,6 +1000,11 @@ export type OnDeletePartSubscription = {
     description: string,
     price: number,
     inventory: number | null,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -771,6 +1013,11 @@ export type OnCreateServiceSubscription = {
     __typename: "Service",
     id: string,
     name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -779,6 +1026,11 @@ export type OnUpdateServiceSubscription = {
     __typename: "Service",
     id: string,
     name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -787,5 +1039,10 @@ export type OnDeleteServiceSubscription = {
     __typename: "Service",
     id: string,
     name: string,
+    _version: number,
+    _deleted: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };

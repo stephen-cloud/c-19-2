@@ -1,16 +1,16 @@
 type Owner @model {
   id: ID!
   name: String!
-  vehicles: [Vehicle] @connection(keyName: "byOwner")
+  vehicles: [Vehicle] @connection(keyName: "byOwner", fields: ["id"])
 }
 
-type Vehicle @model {
+type Vehicle @model @key(name: "byOwner", fields: ["ownerID"]) {
   id: ID!
-  ownerID: ID
   make: String!
   model: String!
   mileage: Int
-  owner: Owner @connection(keyName: "byOwner")
+  ownerID: ID
+  owner: Owner @connection(fields: ["ownerID"])
 }
 
 type Part @model {

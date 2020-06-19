@@ -27,7 +27,7 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "ownerVehiclesId"
+                        "associatedWith": "ownerID"
                     }
                 }
             },
@@ -77,26 +77,6 @@ export const schema = {
                     "type": "Int",
                     "isRequired": false,
                     "attributes": []
-                },
-                "owner": {
-                    "name": "owner",
-                    "isArray": false,
-                    "type": {
-                        "model": "Owner"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "vehicleOwnerId"
-                    }
-                },
-                "ownerVehiclesId": {
-                    "name": "ownerVehiclesId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -105,6 +85,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byOwner",
+                        "fields": [
+                            "ownerID"
+                        ]
+                    }
                 }
             ]
         },
@@ -179,5 +168,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "ac5030f73e902a712b40bbc8287c3be1"
+    "version": "d3dc440bab03a4f53ae15d5afc6e4d6d"
 };

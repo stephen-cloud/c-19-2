@@ -4,6 +4,8 @@ import { Column, Query } from 'material-table';
 import { Vehicle } from './models';
 import { ModelPredicate, MutableModel } from '@aws-amplify/datastore';
 
+export const UnassignedOwner = 'unassigned';
+
 const columns: Column<Vehicle>[] = [
     { title: 'Make', field: 'make' },
     { title: 'Model', field: 'model' },
@@ -25,17 +27,18 @@ function instanceFor(newData: any): Vehicle {
         make: newData.make,
         model: newData.model,
         mileage: parseInt(newData.mileage, 10),
-        owner: newData.owner
+        ownerID: newData.ownerID || UnassignedOwner
     });
 }
 
 function mutator(draft: MutableModel<Vehicle>, newData: any) {
     draft.make = newData.make || '';
-    draft.model = newData.model || [];
+    draft.model = newData.model || '';
     draft.mileage = newData.mileage;
+    draft.ownerID = newData.ownerID || UnassignedOwner;
 }
 
-function Vehicles(props: OverrideProps<Vehicle>) {
+function Vehicles() {
     return (
         <AwesomeTable
             model={Vehicle}
@@ -43,8 +46,6 @@ function Vehicles(props: OverrideProps<Vehicle>) {
             searchCriteria={searchCriteria}
             instanceFor={instanceFor}
             mutator={mutator}
-            overrides={props}
-            onSelectionChange={props.onSelectionChange}
         />
     );
 }

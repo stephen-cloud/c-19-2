@@ -101,7 +101,7 @@ The parameter and return types are just generics.
 
 The function `searchCriteria()` needs criteria specific to the fields in each type. We'll need to pass the whole thing into our generic table.
 
-The DataStore query needs the type. Now so hard. We probably want to change variable named `vehicle` and so on. Not a big deal.
+The DataStore query needs the type. We probably want to change variable named `vehicle` and so on. Not a big deal.
 
 In `onAddRow` we simply have a function that creates an new `Vehicle` from fields.
 

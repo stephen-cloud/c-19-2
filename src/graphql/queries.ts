@@ -2,6 +2,37 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const syncOwners = /* GraphQL */ `
+  query SyncOwners(
+    $filter: ModelOwnerFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncOwners(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        vehicles {
+          nextToken
+          startedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getOwner = /* GraphQL */ `
   query GetOwner($id: ID!) {
     getOwner(id: $id) {
@@ -14,9 +45,20 @@ export const getOwner = /* GraphQL */ `
           make
           model
           mileage
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -32,9 +74,46 @@ export const listOwners = /* GraphQL */ `
         name
         vehicles {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncVehicles = /* GraphQL */ `
+  query SyncVehicles(
+    $filter: ModelVehicleFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncVehicles(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        ownerID
+        make
+        model
+        mileage
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -46,13 +125,11 @@ export const getVehicle = /* GraphQL */ `
       make
       model
       mileage
-      owner {
-        id
-        name
-        vehicles {
-          nextToken
-        }
-      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -69,12 +146,43 @@ export const listVehicles = /* GraphQL */ `
         make
         model
         mileage
-        owner {
-          id
-          name
-        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncParts = /* GraphQL */ `
+  query SyncParts(
+    $filter: ModelPartFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncParts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        description
+        price
+        inventory
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -85,6 +193,11 @@ export const getPart = /* GraphQL */ `
       description
       price
       inventory
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -100,8 +213,41 @@ export const listParts = /* GraphQL */ `
         description
         price
         inventory
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncServices = /* GraphQL */ `
+  query SyncServices(
+    $filter: ModelServiceFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncServices(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -110,6 +256,11 @@ export const getService = /* GraphQL */ `
     getService(id: $id) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -123,8 +274,14 @@ export const listServices = /* GraphQL */ `
       items {
         id
         name
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
       }
       nextToken
+      startedAt
     }
   }
 `;

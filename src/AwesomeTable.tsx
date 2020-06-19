@@ -12,16 +12,11 @@ export interface AwesomeTableProps<T extends PersistentModel> {
     mutator: (draft: MutableModel<T>, newData: any) => void;
     actions?: Action<T>[];
     overrides?: OverrideProps<T>;
-    onSelectionChange?: (rows: T | T[]) => void;
-    selectionProps?: (data: any) => any
 }
 
 export interface OverrideProps<T extends PersistentModel> {
     title?: string;
     options?: Options;
-    selectionProps?: any | ((data: any) => any);
-    onRowSelected?: (row: T) => void;
-    onSelectionChange?: (rows: any | any[]) => void;
 }
 
 function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
@@ -72,14 +67,8 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
                     (predicate) => props.searchCriteria(query, predicate),
                     thisPage)
                 .then(rows => {
-                    console.log('raw rows', rows);
-
-                    const mapped = rowMapper(rows);
-
-                    console.log('mapped rows', mapped);
-
                     resolve({
-                        data: mapped,
+                        data: rowMapper(rows),
                         page: query.page,
                         totalCount: 1000000
                     });
@@ -159,17 +148,11 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
         searchFieldAlignment: "left",
         toolbarButtonAlignment: "left",
         selection: false,
-        // showSelectAllCheckbox: false,
-        // showTextRowsSelected: false,
+        showSelectAllCheckbox: false,
+        showTextRowsSelected: false,
     }
 
-    // There HAS to be a better way to do this {...defaultOptions, ...props.overrides} didn't work and I don't know why
-    //
-    const options: Options = {
-        ...defaultOptions,
-        selection: props.overrides?.options?.selection || false,
-        selectionProps: props.overrides?.options?.selectionProps,
-    };
+    const mergedOptions: Options = { ...defaultOptions, ...props.overrides?.options };
 
     return (
         <Grid container spacing={2}>
@@ -180,9 +163,8 @@ function AwesomeTable<T extends PersistentModel>(props: AwesomeTableProps<T>) {
                     columns={props.columns}
                     editable={editable}
                     localization={localization}
-                    onSelectionChange={props.onSelectionChange}
                     actions={props.actions}
-                    options={options}
+                    options={mergedOptions}
                 />
             </Grid>
         </Grid>

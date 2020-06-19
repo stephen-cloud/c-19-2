@@ -18,8 +18,6 @@ export declare class Vehicle {
   readonly make: string;
   readonly model: string;
   readonly mileage?: number;
-  readonly owner?: Owner;
-  readonly ownerVehiclesId?: string;
   constructor(init: ModelInit<Vehicle>);
   static copyOf(source: Vehicle, mutator: (draft: MutableModel<Vehicle>) => MutableModel<Vehicle> | void): Vehicle;
 }

@@ -2,27 +2,31 @@ import React from "react";
 import AwesomeTable from './AwesomeTable';
 import { Column, Query, Action, Options } from 'material-table';
 import { Owner, Vehicle } from './models';
+import { UnassignedOwner } from './Vehicles'
 import { DataStore, ModelPredicate, MutableModel } from '@aws-amplify/datastore';
 import { Button, Dialog, Card, CardContent, CardActions, CardHeader, Typography } from "@material-ui/core";
 import DirectionsCar from '@material-ui/icons/DirectionsCar';
-import Vehicles from "./Vehicles";
 
 const columns: Column<Owner>[] = [
     { title: 'Name', field: 'name' },
-    { title: 'Vehicles', field: 'vehicles', render: renderVehicles },
+    {
+        title: 'Vehicles',
+        field: 'vehicles',
+        render: (owner: Owner) => renderVehicles(owner)
+    },
 ];
 
-function renderVehicles(owner: Owner, type: "row" | "group") {
-    console.log('owner.vehicles', owner?.vehicles);
+function renderVehicles(owner: Owner) {
+    console.log('renderVehicles for', owner);
+    // DataStore
+    //     .query(Vehicle, c => c.ownerID("eq", owner.id))
+    //     .then(result => { owner.vehicles = result })
+    //     .catch(reason => console.error(reason));
+
+    // console.log('owner.vehicles', vehiclesByOwner);
 
     return (
-        <div>
-            {
-                owner?.vehicles?.map(vehicle => {
-                    return <Button>{vehicle.make} {vehicle.model}</Button>
-                })
-            }
-        </div>
+        <Button>{"a"+JSON.stringify(owner?.vehicles)+"b"}</Button>
     );
 }
 
@@ -47,68 +51,6 @@ function mutator(draft: MutableModel<Owner>, newData: any) {
 }
 
 const Owners = () => {
-    const [dialogOpen, setDialogOpen] = React.useState(false);
-    const [owner, setOwner] = React.useState<Owner>();
-
-    const handleClose = (value: any) => {
-        setDialogOpen(false);
-    };
-
-    const openAction: Action<Owner> = {
-        icon: () => <DirectionsCar />,
-        onClick: (event, selected: Owner | Owner[]) => {
-            const actionOwner = selected as Owner; // TODO: This type is actually Owner | Owner[]. You're a monster Harrison. A monster.
-            console.log('action new owner', actionOwner);
-
-            setOwner(actionOwner);
-
-            setDialogOpen(true);
-        }
-    };
-
-    const actions = [
-        openAction
-    ]
-
-    function ownsVehicle(owner: Owner, vehicle: Vehicle) {
-        return owner &&
-            owner.vehicles?.some((ownerVehicle, index, vehicles) => ownerVehicle === vehicle)
-    }
-
-    const vehicleOverrides: Options = {
-        selection: true,
-        selectionProps: (vehicle: Vehicle) => ({
-            checked: owner && ownsVehicle(owner, vehicle),
-            // color: "primary"
-        })
-    }
-
-    function onSelectionChange(selected: Vehicle[]) {
-        console.log('onSelectionChange selected', selected);
-        if (owner) {
-            console.log('onSelectionChange owner', owner);
-
-            DataStore
-                .query(Owner, owner.id)
-                .then(ownerModel => {
-                    console.log('ownerModel', ownerModel);
-
-                    function mutate(draft: MutableModel<Owner>): MutableModel<Owner> {
-                        return { ...draft, vehicles: selected }
-                    }
-                    const copyOf = Owner.copyOf(ownerModel, mutate);
-
-                    setOwner(copyOf);
-
-                    console.log('new owner', owner);
-
-                    return DataStore.save(copyOf);
-                })
-                .then(result => console.log('onSelectionChange save result', result))
-                .catch(console.error);
-        };
-    }
-
     return (
         <div>
             <AwesomeTable
@@ -117,25 +59,7 @@ const Owners = () => {
                 searchCriteria={searchCriteria}
                 instanceFor={instanceFor}
                 mutator={mutator}
-                actions={actions}
             />
-            <Dialog maxWidth="lg" open={dialogOpen} onClose={handleClose}>
-                <Card>
-                    <CardHeader>
-                        <Typography variant="h4">{owner?.name}</Typography>
-                    </CardHeader>
-                    <CardContent>
-                        <Vehicles
-                            options={vehicleOverrides}
-                            onSelectionChange={onSelectionChange}
-                        />
-                    </CardContent>
-                    <CardActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button onClick={handleClose} variant="contained">Save</Button>
-                    </CardActions>
-                </Card>
-            </Dialog>
         </div>
     );
 }
