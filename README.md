@@ -1,3 +1,5 @@
+![Deploy to Amazon ECS](https://github.com/stephen-cloud/c-19-autobody/workflows/Deploy%20to%20Amazon%20ECS/badge.svg)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
